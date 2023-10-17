@@ -21,11 +21,11 @@ namespace BTCore.Editor
 
     public class NodeDataCommand : ICommand
     {
-        private readonly EntryNode _oldData;
-        private readonly EntryNode _newData;
+        private readonly TreeNodeData _oldData;
+        private readonly TreeNodeData _newData;
         private readonly BTView _btView;
         
-        public NodeDataCommand(BTView btView, EntryNode oldData, EntryNode newData) {
+        public NodeDataCommand(BTView btView, TreeNodeData oldData, TreeNodeData newData) {
             _btView = btView;
             _oldData = oldData;
             _newData = newData;

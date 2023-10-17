@@ -26,9 +26,8 @@ namespace BTCore.Runtime
                 if (string.IsNullOrEmpty(BindKeyName) || Blackboard == null) {
                     return RawValue;
                 }
-            
-                var foundKey = Blackboard.Find<T>(BindKeyName);
-                return foundKey != null ? foundKey.Value : default;
+                
+                return Blackboard.GetValue<T>(BindKeyName);
             }
         }
     }

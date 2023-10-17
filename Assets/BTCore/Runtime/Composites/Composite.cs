@@ -7,6 +7,7 @@
 //    Modified:  2023-09-29
 //============================================================
 
+using System;
 using System.Collections.Generic;
 
 namespace BTCore.Runtime.Composites
@@ -14,6 +15,9 @@ namespace BTCore.Runtime.Composites
     public abstract class Composite : BTNode
     {
         protected int childIndex;
-        public List<BTNode> Children = new List<BTNode>();
+        
+        protected List<BTNode> Children = new List<BTNode>();
+
+        public List<string> ChildrenGuids = new List<string>();
     }
 }

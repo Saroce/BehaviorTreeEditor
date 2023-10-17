@@ -15,7 +15,7 @@ namespace BTCore.Runtime
 {
     public class BTData
     {
-        public EntryNode EntryNode;
+        public TreeNodeData TreeNodeData = new TreeNodeData();
         public Blackboard Blackboard = new Blackboard();
         
         [NonSerialized]
@@ -27,8 +27,8 @@ namespace BTCore.Runtime
         /// <param name="deltaTime"></param>
         /// <returns></returns>
         public NodeState Update(int deltaTime) {
-            if (EntryNode != null && TreeState is NodeState.Inactive or NodeState.Running) {
-                TreeState = EntryNode.Update(deltaTime);
+            if (TreeNodeData.EntryNode != null && TreeState is NodeState.Inactive or NodeState.Running) {
+                TreeState = TreeNodeData.EntryNode.Update(deltaTime);
             }
             
             return TreeState;
@@ -36,8 +36,7 @@ namespace BTCore.Runtime
 
         [OnDeserialized]
         private void OnAfterDeserialize(StreamingContext context) {
-            var allNodes = BTUtil.GetTreeNodes(EntryNode);
-            allNodes.ForEach(node => {
+            TreeNodeData.GetNodes().ForEach(node => {
                 node.OnInit(Blackboard);
             });
         }

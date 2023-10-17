@@ -15,22 +15,22 @@ namespace BTCore.Runtime
 {
     public static class BTEx
     {
-        public static List<BTNode> GetChildren(this BTNode parent) {
-            var children = new List<BTNode>();
+        public static List<string> GetChildrenGuids(this BTNode parent) {
+            var children = new List<string>();
             switch (parent) {
                 case Composite composite: {
-                    children.AddRange(composite.Children);
+                    children.AddRange(composite.ChildrenGuids);
                     break;
                 }
                 case Decorator decorator: {
-                    if (decorator.Child != null) {
-                        children.Add(decorator.Child);   
+                    if (!string.IsNullOrEmpty(decorator.ChildGuid)) {
+                        children.Add(decorator.ChildGuid);   
                     }
                     break;
                 }
                 case EntryNode entryNode: {
-                    if (entryNode.Child != null) {
-                        children.Add(entryNode.Child);   
+                    if (!string.IsNullOrEmpty(entryNode.ChildGuid)) {
+                        children.Add(entryNode.ChildGuid);   
                     }
                     break;
                 }

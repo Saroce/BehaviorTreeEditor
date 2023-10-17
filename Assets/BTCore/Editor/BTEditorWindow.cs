@@ -155,10 +155,10 @@ namespace BTCore.Editor
             
             // 保存当前行为树配置数据
             _toolbarMenu.menu.AppendAction("Save", _ => {
-                var entryNode = BTView.ExportData();
+                var treeNodeData = BTView.ExportData();
                 
                 // 入口子节点为空
-                if (entryNode.Child == null) {
+                if (string.IsNullOrEmpty(treeNodeData.EntryNode.ChildGuid)) {
                     ShowNotification("BT入口不能为空");
                     return;
                 }
@@ -171,7 +171,7 @@ namespace BTCore.Editor
 
                 try {
                     var btData = new BTData {
-                        EntryNode = BTView.ExportData(),
+                        TreeNodeData = BTView.ExportData(),
                         Blackboard = Blackboard
                     };
                     var json = JsonConvert.SerializeObject(btData, BTDef.SerializerSettingsAll);
@@ -260,7 +260,7 @@ namespace BTCore.Editor
                 UpdateUndoRedoButtonState();
             }
 
-            BTView.ImportData(btData.EntryNode);
+            BTView.ImportData(btData.TreeNodeData);
             _blackboardView.ImportData(btData.Blackboard);
         }
     }

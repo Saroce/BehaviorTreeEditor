@@ -7,11 +7,15 @@
 //    Modified:  2023-10-01
 //============================================================
 
+using System;
+
 namespace BTCore.Runtime
 {
     public class EntryNode : BTNode
     {
-        public BTNode Child;
+        private BTNode Child;
+
+        public string ChildGuid;
         
         protected override void OnStart() {
             

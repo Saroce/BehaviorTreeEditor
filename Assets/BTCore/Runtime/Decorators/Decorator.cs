@@ -7,11 +7,15 @@
 //    Modified:  2023-10-01
 //============================================================
 
+using System;
+
 namespace BTCore.Runtime.Decorators
 {
     public abstract class Decorator : BTNode
     {
-        public BTNode Child;
+        protected BTNode Child;
+
+        public string ChildGuid;
     }
 }
 

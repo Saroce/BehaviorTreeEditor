@@ -23,11 +23,11 @@ using UnityEngine.UIElements;
 
 namespace BTCore.Editor
 {
-    public class BTView : GraphView, IDataSerializableEditor<EntryNode>
+    public class BTView : GraphView, IDataSerializableEditor<TreeNodeData>
     {
         public new class UxmlFactory : UxmlFactory<BTView, UxmlTraits> { }
 
-        private EntryNode _entryNode;
+        private TreeNodeData _treeNodeData;
 
         public Action<BTNodeView> OnNodeSelected;
 
@@ -114,24 +114,24 @@ namespace BTCore.Editor
             };
         }
         
-        public void ImportData(EntryNode entryNode) {
-            _entryNode = entryNode;
+        public void ImportData(TreeNodeData treeNodeData) {
+            _treeNodeData = treeNodeData;
             
             ClearGraphs();
             BTEditorWindow.Instance.ClearNodeSelectedInspector();
             
             // 默认没有会创建对应的入口节点
-            _entryNode ??= CreateNode<EntryNode>(_entryPos) as EntryNode;
-            
-            var treeNodes = BTUtil.GetTreeNodes(_entryNode);
+            _treeNodeData.EntryNode ??= CreateNode<EntryNode>(_entryPos) as EntryNode;
+
+            var treeNodes = treeNodeData.GetNodes();
             // 根据保存的数据创建对应节点
             treeNodes.ForEach(node => CreateNodeView(node));
             // 根据节点数据关系创建连线
             treeNodes.ForEach(node => {
-                var children = node.GetChildren();
-                children.ForEach(child => {
+                var childrenGuids = node.GetChildrenGuids();
+                childrenGuids.ForEach(guid => {
                     var parentView = FindNodeView(node.Guid);
-                    var childView = FindNodeView(child.Guid);
+                    var childView = FindNodeView(guid);
                     if (parentView != null && childView != null) {
                         ConnectNode(parentView, childView);
                     }
@@ -150,8 +150,8 @@ namespace BTCore.Editor
             return GetNodeByGuid(guid) as BTNodeView;
         }
 
-        public EntryNode ExportData() {
-            return _entryNode;
+        public TreeNodeData ExportData() {
+            return _treeNodeData;
         }
 
         /// <summary>
@@ -172,6 +172,13 @@ namespace BTCore.Editor
                 if (ele is Edge edge) {
                     if (edge.output.node is BTNodeView parentView && edge.input.node is BTNodeView childView) {
                         RemoveChild(parentView.Node, childView.Node);
+                    }
+                }
+                // 节点被删除
+                if (ele is BTNodeView nodeView) {
+                    var foundNode = _treeNodeData.GetNodeByGuid(nodeView.Node.Guid);
+                    if (foundNode != null) {
+                        _treeNodeData.RemoveNode(foundNode);
                     }
                 }
             });
@@ -233,11 +240,11 @@ namespace BTCore.Editor
         }
 
 
-        private static BTNode CreateNode<T>(Vector2 pos) where T : BTNode {
+        private BTNode CreateNode<T>(Vector2 pos) where T : BTNode {
             return CreateNode(typeof(T), pos);
         }
 
-        private static BTNode CreateNode(Type type, Vector2 pos) {
+        private BTNode CreateNode(Type type, Vector2 pos) {
             if (Activator.CreateInstance(type) is not BTNode node) {
                 return null;
             }
@@ -246,7 +253,8 @@ namespace BTCore.Editor
             node.Guid = Guid.NewGuid().ToString();
             node.PosX = pos.x;
             node.PosY = pos.y;
-
+            
+            _treeNodeData.AddNode(node);
             return node;
         }
         
@@ -299,47 +307,47 @@ namespace BTCore.Editor
         }
 
         private void AddChild(BTNode parentNode, BTNode childNode) {
-            var oldData = _entryNode.DeepCopy();
+            var oldData = _treeNodeData.DeepCopy();
             
             switch (parentNode) {
                 case Composite composite: {
-                    composite.Children.Add(childNode);
+                    composite.ChildrenGuids.Add(childNode.Guid);
                     break;
                 }
                 case Decorator decorator: {
-                    decorator.Child = childNode;
+                    decorator.ChildGuid = childNode.Guid;
                     break;
                 }
                 case EntryNode entryNode: {
-                    entryNode.Child = childNode;
+                    entryNode.ChildGuid = childNode.Guid;
                     break;
                 }
             }
 
-            var newData = _entryNode.DeepCopy();
+            var newData = _treeNodeData.DeepCopy();
             var command = new NodeDataCommand(this, oldData, newData);
             BTEditorWindow.Instance.AddCommand(command);
         }
 
         private void RemoveChild(BTNode parentNode, BTNode childNode) {
-            var oldData = _entryNode.DeepCopy();
+            var oldData = _treeNodeData.DeepCopy();
             
             switch (parentNode) {
                 case Composite composite: {
-                    composite.Children.Remove(childNode);
+                    composite.ChildrenGuids.Remove(childNode.Guid);
                     break;
                 }
                 case Decorator decorator: {
-                    decorator.Child = null;
+                    decorator.ChildGuid = null;
                     break;
                 }
                 case EntryNode entryNode: {
-                    entryNode.Child = null;
+                    entryNode.ChildGuid = null;
                     break;
                 }
             }
             
-            var newData = _entryNode.DeepCopy();
+            var newData = _treeNodeData.DeepCopy();
             var command = new NodeDataCommand(this, oldData, newData);
             BTEditorWindow.Instance.AddCommand(command);
         }

@@ -30,7 +30,7 @@ namespace BTCore.Editor
 
         private readonly BTView _btView;
         private NodePos _recordPos;
-        private EntryNode _oldData;
+        private TreeNodeData _oldData;
 
         public BTNodeView NodeParent {
             get {
@@ -166,8 +166,13 @@ namespace BTCore.Editor
         public void SortChildren() {
             // 组合节点下面的子节点在被任意移动时，需要根据子节点当前位置进行重行排序
             if (Node is Composite composite) {
-                composite.Children.Sort((left, right) => left.PosX.CompareTo(right.PosX));
+                composite.ChildrenGuids.Sort(ChildNodeComparer);
             }
+        }
+
+        private int ChildNodeComparer(string leftGuid, string rightGuid) {
+            // TODO 
+            return 0;
         }
 
         /// <summary>
