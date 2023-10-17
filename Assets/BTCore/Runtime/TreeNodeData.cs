@@ -15,8 +15,8 @@ namespace BTCore.Runtime
 {
     public class TreeNodeData
     {
+        [JsonIgnore]
         public EntryNode EntryNode;
-        
         [JsonProperty]
         private readonly List<BTNode> Nodes = new List<BTNode>();
         

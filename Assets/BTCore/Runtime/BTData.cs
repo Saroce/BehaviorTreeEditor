@@ -10,6 +10,8 @@
 using System;
 using System.Runtime.Serialization;
 using BTCore.Runtime.Blackboards;
+using BTCore.Runtime.Composites;
+using BTCore.Runtime.Decorators;
 
 namespace BTCore.Runtime
 {
@@ -38,7 +40,26 @@ namespace BTCore.Runtime
         private void OnAfterDeserialize(StreamingContext context) {
             TreeNodeData.GetNodes().ForEach(node => {
                 node.OnInit(Blackboard);
+                RebindChild(node);
             });
+        }
+
+        private void RebindChild(BTNode node) {
+            var childrenGuids = node.GetChildrenGuids();
+            foreach (var guid in childrenGuids) {
+                if (node is EntryNode entryNode) {
+                    TreeNodeData.EntryNode = entryNode;
+                    entryNode.SetChild(TreeNodeData.GetNodeByGuid(guid));
+                    break;
+                }
+                if (node is Decorator decorator) {
+                    decorator.SetChild(TreeNodeData.GetNodeByGuid(guid));
+                    break;
+                }
+                if (node is Composite composite) {
+                    composite.AddChild(TreeNodeData.GetNodeByGuid(guid));
+                }
+            }
         }
     }
 }

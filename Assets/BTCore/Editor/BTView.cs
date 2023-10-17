@@ -166,8 +166,11 @@ namespace BTCore.Editor
             if (_isRemoveOnly) {
                 return graphViewChange;
             }
+
+            var oldData = _treeNodeData.DeepCopy();
+            var toRemove = graphViewChange.elementsToRemove;
             
-            graphViewChange.elementsToRemove?.ForEach(ele => {
+            toRemove?.ForEach(ele => {
                 // 连线被删除，更新BT数据部分之间的连接关系
                 if (ele is Edge edge) {
                     if (edge.output.node is BTNodeView parentView && edge.input.node is BTNodeView childView) {
@@ -182,14 +185,22 @@ namespace BTCore.Editor
                     }
                 }
             });
-            
+
             // 连线被创建，更新BT数据部分之间的连接关系
-            graphViewChange.edgesToCreate?.ForEach(edge => {
+            var edgesToCreate = graphViewChange.edgesToCreate;
+            edgesToCreate?.ForEach(edge => {
                 if (edge.output.node is BTNodeView parentView && edge.input.node is BTNodeView childView) {
                     AddChild(parentView.Node, childView.Node);
                 }
             });
 
+            // 节点被删除 or 连线被删除 or 连线被创建 -> 都需要创建记录数据
+            if (toRemove is {Count: > 0} || edgesToCreate is {Count: > 0}) {
+                var newData = _treeNodeData.DeepCopy();
+                var command = new NodeDataCommand(this, oldData, newData);
+                BTEditorWindow.Instance.AddCommand(command);
+            }
+            
             // 节点被移动，对于复合节点，需要重新排序Children的顺序关系
             if (graphViewChange.movedElements != null) {
                 nodes.ForEach(node => {
@@ -208,6 +219,7 @@ namespace BTCore.Editor
 
         public void CreteNode(Type type, Vector2 pos, BTNodeView sourceNode, bool isAsParent) {
             var nodeView = (BTNodeView) null;
+            var oldData = _treeNodeData.DeepCopy();
             var node = CreateNode(type, pos);
             
             // sourceNode作为子节点
@@ -235,7 +247,12 @@ namespace BTCore.Editor
                     AddChildView(sourceNode, nodeView);
                 }
             }
-
+            
+            var newData = _treeNodeData.DeepCopy();
+            var command = new NodeDataCommand(this, oldData, newData);
+            BTEditorWindow.Instance.AddCommand(command);
+            
+            // 选中创建的节点
             SelectNode(nodeView);
         }
 
@@ -307,8 +324,6 @@ namespace BTCore.Editor
         }
 
         private void AddChild(BTNode parentNode, BTNode childNode) {
-            var oldData = _treeNodeData.DeepCopy();
-            
             switch (parentNode) {
                 case Composite composite: {
                     composite.ChildrenGuids.Add(childNode.Guid);
@@ -323,15 +338,9 @@ namespace BTCore.Editor
                     break;
                 }
             }
-
-            var newData = _treeNodeData.DeepCopy();
-            var command = new NodeDataCommand(this, oldData, newData);
-            BTEditorWindow.Instance.AddCommand(command);
         }
 
         private void RemoveChild(BTNode parentNode, BTNode childNode) {
-            var oldData = _treeNodeData.DeepCopy();
-            
             switch (parentNode) {
                 case Composite composite: {
                     composite.ChildrenGuids.Remove(childNode.Guid);
@@ -346,10 +355,6 @@ namespace BTCore.Editor
                     break;
                 }
             }
-            
-            var newData = _treeNodeData.DeepCopy();
-            var command = new NodeDataCommand(this, oldData, newData);
-            BTEditorWindow.Instance.AddCommand(command);
         }
 
         private class CopyPasteData

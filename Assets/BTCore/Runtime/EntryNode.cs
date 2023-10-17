@@ -13,16 +13,20 @@ namespace BTCore.Runtime
 {
     public class EntryNode : BTNode
     {
-        private BTNode Child;
+        private BTNode _child;
 
         public string ChildGuid;
+
+        public void SetChild(BTNode node) {
+            _child = node;
+        }
         
         protected override void OnStart() {
             
         }
 
         protected override NodeState OnUpdate() {
-            return Child?.Update(DeltaTime) ?? NodeState.Failure;
+            return _child?.Update(DeltaTime) ?? NodeState.Failure;
         }
 
         protected override void OnStop() {

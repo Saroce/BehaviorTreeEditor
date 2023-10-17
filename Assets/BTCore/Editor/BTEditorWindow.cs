@@ -91,9 +91,8 @@ namespace BTCore.Editor
             _blackboardView.OnKeyListChanged = OnBlackboardKeyChanged;
             BTView.OnNodeSelected = OnNodeSelected;
             
-            SelectNewTree(new BTData());
-
             _undoRedo = new BTUndoRedo();
+            SelectNewTree(new BTData());
 
             if (Application.isPlaying) {
                 OnSelectionChange();
