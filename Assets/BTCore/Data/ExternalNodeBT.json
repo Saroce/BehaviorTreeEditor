@@ -1,0 +1,103 @@
+{
+  "$type": "BTCore.Runtime.BTData, BTRuntime",
+  "TreeNodeData": {
+    "$type": "BTCore.Runtime.TreeNodeData, BTRuntime",
+    "Nodes": {
+      "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.BTNode, BTRuntime]], mscorlib",
+      "$values": [
+        {
+          "$type": "BTCore.Runtime.EntryNode, BTRuntime",
+          "ChildGuid": "3412a5af-d671-4fdc-b45e-cee41961110a",
+          "Name": "EntryNode",
+          "Guid": "84692344-e6f7-4d51-866b-e8c6785656e5",
+          "PosX": 225.0,
+          "PosY": 150.0
+        },
+        {
+          "$type": "BTCore.Runtime.Composites.Sequence, BTRuntime",
+          "ChildrenGuids": {
+            "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+            "$values": [
+              "daea9dfd-4e65-4742-bc36-9e675ce9f46f",
+              "86548117-a2b8-403e-909e-467bd4fd47f6",
+              "2e04f77a-2b67-4fde-afc3-1d1c7f6de181",
+              "6a679249-40ef-44e7-a615-36e7b4caad1e"
+            ]
+          },
+          "Name": "Sequence",
+          "Guid": "3412a5af-d671-4fdc-b45e-cee41961110a",
+          "PosX": 225.0,
+          "PosY": 255.0
+        },
+        {
+          "$type": "BTCore.Runtime.Externals.ExternalAction, BTRuntime",
+          "TypeName": "MyAction",
+          "Properties": {
+            "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
+            "Name": "World"
+          },
+          "Name": "ExternalAction",
+          "Guid": "56830467-1447-4e69-a99b-d3f5958a41e1",
+          "PosX": 523.2,
+          "PosY": 536.800049
+        },
+        {
+          "$type": "BTCore.Runtime.Externals.ExternalCondition, BTRuntime",
+          "TypeName": "MyCondition",
+          "Properties": {
+            "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
+            "CanPass": "true"
+          },
+          "Name": "ExternalCondition",
+          "Guid": "86548117-a2b8-403e-909e-467bd4fd47f6",
+          "PosX": 167.0,
+          "PosY": 411.0
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
+          "Message": {
+            "$type": "BTCore.Runtime.BindValue`1[[System.String, mscorlib]], BTRuntime",
+            "BindKeyName": "",
+            "RawValue": "Hello",
+            "Blackboard": {
+              "$type": "BTCore.Runtime.Blackboards.Blackboard, BTRuntime",
+              "Keys": {
+                "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
+                "$values": []
+              }
+            },
+            "Value": "Hello"
+          },
+          "Name": "Log",
+          "Guid": "daea9dfd-4e65-4742-bc36-9e675ce9f46f",
+          "PosX": -8.040009,
+          "PosY": 411.0
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
+          "Duration": 3000,
+          "Name": "Wait",
+          "Guid": "2e04f77a-2b67-4fde-afc3-1d1c7f6de181",
+          "PosX": 343.199982,
+          "PosY": 410.4
+        },
+        {
+          "$type": "BTCore.Runtime.Decorators.Repeater, BTRuntime",
+          "RepeatCount": 3,
+          "ChildGuid": "56830467-1447-4e69-a99b-d3f5958a41e1",
+          "Name": "Repeater",
+          "Guid": "6a679249-40ef-44e7-a615-36e7b4caad1e",
+          "PosX": 523.832031,
+          "PosY": 410.4
+        }
+      ]
+    }
+  },
+  "Blackboard": {
+    "$type": "BTCore.Runtime.Blackboards.Blackboard, BTRuntime",
+    "Keys": {
+      "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
+      "$values": []
+    }
+  }
+}

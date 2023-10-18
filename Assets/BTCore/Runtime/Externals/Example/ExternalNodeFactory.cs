@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------
-//        File:  NodeFactory.cs
-//       Brief:  NodeFactory
+//        File:  ExternalNodeFactory.cs
+//       Brief:  ExternalNodeFactory
 //
 //      Author:  Saroce, Saroce233@163.com
 //
@@ -10,13 +10,13 @@
 using System;
 using System.Collections.Generic;
 
-namespace BTCore.Runtime.Externals
+namespace BTCore.Runtime.Externals.Example
 {
-    public class NodeFactory
+    public class ExternalNodeFactory
     {
         private readonly Dictionary<string, Type> _name2Types = new Dictionary<string, Type>();
 
-        public void AddNodeMap(string typeName, Type type) {
+        public void AddNodeType(string typeName, Type type) {
             if (_name2Types.ContainsKey(typeName)) {
                 return;
             }
@@ -24,13 +24,13 @@ namespace BTCore.Runtime.Externals
             _name2Types.Add(typeName, type);
         }
 
-        public BTNode CrateNode(string name) {
+        public IExternalNode CrateNode(string name) {
             if (!_name2Types.ContainsKey(name)) {
                 return null;
             }
 
             var type = _name2Types[name];
-            return Activator.CreateInstance(type) as BTNode;
+            return Activator.CreateInstance(type) as IExternalNode;
         }
     }
 }

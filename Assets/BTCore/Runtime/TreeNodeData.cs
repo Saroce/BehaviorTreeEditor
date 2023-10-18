@@ -37,6 +37,20 @@ namespace BTCore.Runtime
             Nodes.Remove(toRemove);
             _guid2Nodes.Remove(node.Guid);
         }
+
+        /// <summary>
+        /// 节点替换，主要用于外部节点处理
+        /// </summary>
+        /// <param name="index">位于Nodes列表中的索引</param>
+        /// <param name="newNode">新的外部节点</param>
+        public void ReplaceNode(int index, BTNode newNode) {
+            if (index < 0 || index >= Nodes.Count) {
+                return;
+            }
+            
+            Nodes[index] = newNode;
+            _guid2Nodes[newNode.Guid] = newNode;
+        }
         
         public List<BTNode> GetNodes() => Nodes;
 

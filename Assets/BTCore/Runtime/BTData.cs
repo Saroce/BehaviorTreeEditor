@@ -40,10 +40,17 @@ namespace BTCore.Runtime
         private void OnAfterDeserialize(StreamingContext context) {
             TreeNodeData.GetNodes().ForEach(node => {
                 node.OnInit(Blackboard);
-                RebindChild(node);
             });
         }
 
+        /// <summary>
+        /// 反序列化后重建树的节点之间的连接关系
+        /// </summary>
+        public void RebuildTree() {
+            var treeNodes = TreeNodeData.GetNodes();
+            treeNodes.ForEach(RebindChild);
+        }
+        
         private void RebindChild(BTNode node) {
             var childrenGuids = node.GetChildrenGuids();
             foreach (var guid in childrenGuids) {

@@ -175,8 +175,24 @@ namespace BTCore.Editor
         }
 
         private int ChildNodeComparer(string leftGuid, string rightGuid) {
-            // TODO 
-            return 0;
+            var treeNodeData = _btView.ExportData();
+            if (treeNodeData == null) {
+                return 0;
+            }
+
+            var leftNode = treeNodeData.GetNodeByGuid(leftGuid);
+            var rightNode = treeNodeData.GetNodeByGuid(rightGuid);
+
+            if (leftNode == null) {
+                return 1;
+            }
+
+            if (rightGuid == null) {
+                return -1;
+            }
+
+            // 比较节点横坐标值排序
+            return leftNode.PosX.CompareTo(rightNode.PosX);
         }
 
         /// <summary>

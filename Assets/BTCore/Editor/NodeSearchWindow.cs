@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using BTCore.Runtime.Composites;
 using BTCore.Runtime.Conditions;
 using BTCore.Runtime.Decorators;
+using BTCore.Runtime.Externals;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -60,6 +61,10 @@ namespace BTCore.Editor
             {
                 tree.Add(new SearchTreeGroupEntry(new GUIContent("Conditions"), 1));
                 foreach (var type in TypeCache.GetTypesDerivedFrom<Condition>()) {
+                    if (type.IsSubclassOf(typeof(ExternalCondition))) {
+                        continue;
+                    }
+                    
                     tree.Add(new SearchTreeEntry(new GUIContent($"{type.Name}", _indentIcon)) { level = 2, userData = type});
                 }
             }
@@ -68,6 +73,10 @@ namespace BTCore.Editor
             if (_sourceNode == null || _isAsParent) {
                 tree.Add(new SearchTreeGroupEntry(new GUIContent("Actions"), 1));
                 foreach (var type in TypeCache.GetTypesDerivedFrom<Action>()) {
+                    if (type.IsSubclassOf(typeof(ExternalAction))) {
+                        continue;
+                    }
+                    
                     tree.Add(new SearchTreeEntry(new GUIContent($"{type.Name}", _indentIcon)) { level = 2, userData = type});
                 }
             }

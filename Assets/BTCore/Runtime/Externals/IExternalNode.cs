@@ -19,6 +19,7 @@ namespace BTCore.Runtime.Externals
         string TypeName { get; set; }
         /// <summary>
         /// PropertyValue统一用string存储，外部工程直接使用Convert转换为对应需要类型
+        /// 主要用来传递基本类型数据，特定工程的类型实例数据请使用黑板来传递
         /// </summary>
         Dictionary<string, string> Properties { get; set; }
     }
