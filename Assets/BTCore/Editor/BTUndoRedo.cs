@@ -7,8 +7,11 @@
 //    Modified:  2023-10-15
 //============================================================
 
+using System;
 using System.Collections.Generic;
 using BTCore.Runtime;
+using Newtonsoft.Json;
+using UnityEngine;
 
 namespace BTCore.Editor
 {
@@ -21,22 +24,35 @@ namespace BTCore.Editor
 
     public class NodeDataCommand : ICommand
     {
-        private readonly TreeNodeData _oldData;
-        private readonly TreeNodeData _newData;
+        private readonly string _oldData;
+        private readonly string _newData;
         private readonly BTView _btView;
         
-        public NodeDataCommand(BTView btView, TreeNodeData oldData, TreeNodeData newData) {
+        public NodeDataCommand(BTView btView, string oldData, string newData) {
             _btView = btView;
             _oldData = oldData;
             _newData = newData;
         }
         
         public void Execute() {
-            _btView.ImportData(_newData);
+            try {
+                var treeNodeData = JsonConvert.DeserializeObject<TreeNodeData>(_newData, BTDef.SerializerSettingsAuto);
+                _btView.ImportData(treeNodeData);
+            }
+            catch (Exception e) {
+                Debug.LogError($"Node data execute failed, ex: {e}");
+            }
         }
 
         public void Undo() {
-            _btView.ImportData(_oldData);
+            try {
+                var treeNodeData = JsonConvert.DeserializeObject<TreeNodeData>(_oldData, BTDef.SerializerSettingsAuto);
+                _btView.ImportData(treeNodeData);
+            }
+            catch (Exception e) {
+                Debug.LogError($"Node data undo failed, ex: {e}");
+                return;
+            }
         }
     }
     

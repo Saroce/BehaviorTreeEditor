@@ -18,7 +18,7 @@ namespace BTCore.Runtime
         [JsonIgnore]
         public EntryNode EntryNode;
         [JsonProperty]
-        private readonly List<BTNode> Nodes = new List<BTNode>();
+        private List<BTNode> Nodes = new List<BTNode>();
         
         // key == Guid.NewGuid().ToString, 暂时不对key做判断，应该不会存在相同的key
         private readonly Dictionary<string, BTNode> _guid2Nodes = new Dictionary<string, BTNode>();
@@ -46,7 +46,13 @@ namespace BTCore.Runtime
         
         [OnDeserialized]
         private void OnAfterDeserialize(StreamingContext context) {
-            Nodes.ForEach(node => { _guid2Nodes.Add(node.Guid, node); });
+            Nodes.ForEach(node => {
+                if (node is EntryNode entryNode) {
+                    EntryNode = entryNode;
+                }
+                _guid2Nodes.Add(node.Guid, node);
+            });
+            
         }
     }
 }

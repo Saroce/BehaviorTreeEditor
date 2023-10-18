@@ -12,7 +12,7 @@ using BTCore.Runtime;
 using BTCore.Runtime.Composites;
 using BTCore.Runtime.Conditions;
 using BTCore.Runtime.Decorators;
-using Core.Lite.Extensions;
+using Newtonsoft.Json;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -30,7 +30,7 @@ namespace BTCore.Editor
 
         private readonly BTView _btView;
         private NodePos _recordPos;
-        private TreeNodeData _oldData;
+        private string _oldData;
 
         public BTNodeView NodeParent {
             get {
@@ -134,11 +134,15 @@ namespace BTCore.Editor
             base.SetPosition(newPos);
 
             // 更新坐标数据之前，先记录下
-            _oldData ??= _btView.ExportData().DeepCopy();
+            if (string.IsNullOrEmpty(_oldData)) {
+                _oldData = JsonConvert.SerializeObject(_btView.ExportData(), BTDef.SerializerSettingsAll);
+            }
+            
             Node.PosX = newPos.x;
             Node.PosY = newPos.y;
         }
 
+        
         public override void OnSelected() {
             base.OnSelected();
             
@@ -154,11 +158,11 @@ namespace BTCore.Editor
             base.OnUnselected();
 
             var curPos = new NodePos(Node.PosX, Node.PosY);
-            if (!_recordPos.IsChanged(curPos) || _oldData == null) {
+            if (!_recordPos.IsChanged(curPos) || string.IsNullOrEmpty(_oldData)) {
                 return;
             }
             
-            var newData = _btView.ExportData().DeepCopy();
+            var newData = JsonConvert.SerializeObject(_btView.ExportData(), BTDef.SerializerSettingsAll);
             var command = new NodeDataCommand(_btView, _oldData, newData);
             BTEditorWindow.Instance.AddCommand(command);
         }

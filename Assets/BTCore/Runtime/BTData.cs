@@ -48,7 +48,6 @@ namespace BTCore.Runtime
             var childrenGuids = node.GetChildrenGuids();
             foreach (var guid in childrenGuids) {
                 if (node is EntryNode entryNode) {
-                    TreeNodeData.EntryNode = entryNode;
                     entryNode.SetChild(TreeNodeData.GetNodeByGuid(guid));
                     break;
                 }

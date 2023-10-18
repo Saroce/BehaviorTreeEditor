@@ -13,13 +13,11 @@ using System.Linq;
 using BTCore.Runtime;
 using BTCore.Runtime.Composites;
 using BTCore.Runtime.Decorators;
-using Core.Lite.Extensions;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
-
 
 namespace BTCore.Editor
 {
@@ -62,11 +60,12 @@ namespace BTCore.Editor
 
             unserializeAndPaste = (_, data) => {
                 var copyPasteData = JsonConvert.DeserializeObject<CopyPasteData>(data);
-                if (copyPasteData == null) {
+                if (copyPasteData == null || copyPasteData.Guids.Count <= 0) {
                     return;
                 }
                 
                 ClearSelection();
+                var oldData = JsonConvert.SerializeObject(_treeNodeData, BTDef.SerializerSettingsAll);
                 
                 // 找到所有复制的节点
                 var nodesToCopy = new List<BTNodeView>();
@@ -111,6 +110,10 @@ namespace BTCore.Editor
                     AddChild(newParent.Node, newChild.Node);
                     AddChildView(newParent, newChild);
                 }
+                
+                var newData = JsonConvert.SerializeObject(_treeNodeData, BTDef.SerializerSettingsAll);
+                var command = new NodeDataCommand(this, oldData, newData);
+                BTEditorWindow.Instance.AddCommand(command);
             };
         }
         
@@ -167,7 +170,7 @@ namespace BTCore.Editor
                 return graphViewChange;
             }
 
-            var oldData = _treeNodeData.DeepCopy();
+            var oldData = JsonConvert.SerializeObject(_treeNodeData, BTDef.SerializerSettingsAll);
             var toRemove = graphViewChange.elementsToRemove;
             
             toRemove?.ForEach(ele => {
@@ -196,7 +199,7 @@ namespace BTCore.Editor
 
             // 节点被删除 or 连线被删除 or 连线被创建 -> 都需要创建记录数据
             if (toRemove is {Count: > 0} || edgesToCreate is {Count: > 0}) {
-                var newData = _treeNodeData.DeepCopy();
+                var newData = JsonConvert.SerializeObject(_treeNodeData, BTDef.SerializerSettingsAll);
                 var command = new NodeDataCommand(this, oldData, newData);
                 BTEditorWindow.Instance.AddCommand(command);
             }
@@ -219,7 +222,7 @@ namespace BTCore.Editor
 
         public void CreteNode(Type type, Vector2 pos, BTNodeView sourceNode, bool isAsParent) {
             var nodeView = (BTNodeView) null;
-            var oldData = _treeNodeData.DeepCopy();
+            var oldData = JsonConvert.SerializeObject(_treeNodeData, BTDef.SerializerSettingsAll);
             var node = CreateNode(type, pos);
             
             // sourceNode作为子节点
@@ -248,7 +251,7 @@ namespace BTCore.Editor
                 }
             }
             
-            var newData = _treeNodeData.DeepCopy();
+            var newData = JsonConvert.SerializeObject(_treeNodeData, BTDef.SerializerSettingsAll);
             var command = new NodeDataCommand(this, oldData, newData);
             BTEditorWindow.Instance.AddCommand(command);
             
