@@ -21,7 +21,7 @@ namespace BTCore.Editor.Inspectors.Actions
         [ShowInInspector]
         [LabelText("Duration(ms)")]
         [LabelWidth(100)]
-        [OnValueChanged("FieldValueChanged")]
+        [OnValueChanged("OnFieldValueChanged")]
         private int _duration;
         
         private Wait _waitData;
@@ -39,7 +39,7 @@ namespace BTCore.Editor.Inspectors.Actions
             return _waitData;
         }
 
-        protected override void FieldValueChanged() {
+        protected override void OnFieldValueChanged() {
             if (_waitData == null) {
                 return;
             }

@@ -28,7 +28,7 @@ namespace BTCore.Editor.Inspectors
         [HorizontalGroup]
         [ShowIf("_showRawValue")]
         [InlineButton("SelectBlackboardKey", "▼")]
-        [OnValueChanged("FieldValueChanged")]
+        [OnValueChanged("OnFieldValueChanged")]
         private T _rawValue;
 
         [ShowInInspector]
@@ -37,7 +37,7 @@ namespace BTCore.Editor.Inspectors
         [ValueDropdown("GetKeyNames")]
         [ShowIf("_showKeyName")]
         [InlineButton("EditRawValue", "↺")]
-        [OnValueChanged("FieldValueChanged")]
+        [OnValueChanged("OnFieldValueChanged")]
         private string _bindKeyName = NONE_KEY;
         
         private const string NONE_KEY = "(None)";
@@ -87,7 +87,7 @@ namespace BTCore.Editor.Inspectors
             return _bindValue;
         }
 
-        private void FieldValueChanged() {
+        private void OnFieldValueChanged() {
             _bindValue.RawValue = _rawValue;
             _bindValue.BindKeyName = _bindKeyName == NONE_KEY ? string.Empty : _bindKeyName;
         }

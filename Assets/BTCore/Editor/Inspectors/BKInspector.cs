@@ -36,7 +36,7 @@ namespace BTCore.Editor.Inspectors
         [ShowInInspector]
         [HorizontalGroup("Variable List")]
         [HideLabel]
-        [OnValueChanged("FieldValueChanged")]
+        [OnValueChanged("OnFieldValueChanged")]
         private  T _value;
 
         private BlackboardKey _blackboardKey;
@@ -57,7 +57,7 @@ namespace BTCore.Editor.Inspectors
             return _blackboardKey;
         }
 
-        protected void FieldValueChanged() {
+        protected void OnFieldValueChanged() {
             if (_blackboardKey == null || _fieldInfo == null) {
                 return;
             }

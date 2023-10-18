@@ -34,7 +34,7 @@ namespace BTCore.Editor.Inspectors
         [ShowInInspector]
         [TableList(AlwaysExpanded = true, HideToolbar = true, ShowIndexLabels = true, ShowPaging = true)]
         [ShowIf("_showKeyInspectors")]
-        [OnValueChanged("FieldValueChanged")]
+        [OnValueChanged("OnFieldValueChanged")]
         private List<BKInspector> _keyInspectors = new List<BKInspector>();
 
         private Blackboard _blackboard;
@@ -97,7 +97,7 @@ namespace BTCore.Editor.Inspectors
             return _typeName2KeyTypes.Keys;;
         }
         
-        protected override void FieldValueChanged() {
+        protected override void OnFieldValueChanged() {
             _blackboard.Keys = _keyInspectors.ConvertAll(inspector => inspector.ExportData());
             OnKeyListChanged?.Invoke();
         }

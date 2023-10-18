@@ -20,7 +20,7 @@ namespace BTCore.Editor.Inspectors.Actions
         [ShowInInspector]
         [LabelText("Log")]
         [LabelWidth(100)]
-        [OnValueChanged("FieldValueChanged")]
+        [OnValueChanged("OnFieldValueChanged")]
         private BVInspector<string> _message = new BVInspector<string>();
         
         private Log _logData;
@@ -38,7 +38,7 @@ namespace BTCore.Editor.Inspectors.Actions
             return _logData;
         }
 
-        protected override void FieldValueChanged() {
+        protected override void OnFieldValueChanged() {
             if (_logData == null) {
                 return;
             }

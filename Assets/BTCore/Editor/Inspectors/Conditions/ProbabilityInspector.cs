@@ -20,7 +20,7 @@ namespace BTCore.Editor.Inspectors.Conditions
         [ShowInInspector]
         [LabelText("Probability(?)")]
         [LabelWidth(100)]
-        [OnValueChanged("FieldValueChanged")]
+        [OnValueChanged("OnFieldValueChanged")]
         [PropertyTooltip("概率范围0 ~ 100")]
         private BVInspector<int> _probability = new BVInspector<int>();
 
@@ -39,7 +39,7 @@ namespace BTCore.Editor.Inspectors.Conditions
             return _probabilityData;
         }
         
-        protected override void FieldValueChanged() {
+        protected override void OnFieldValueChanged() {
             if (_probabilityData == null) {
                 return;
             }

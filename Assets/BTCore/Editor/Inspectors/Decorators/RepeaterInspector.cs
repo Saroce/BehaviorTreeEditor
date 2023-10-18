@@ -20,7 +20,7 @@ namespace BTCore.Editor.Inspectors.Decorators
         [ShowInInspector]
         [LabelText("Repeat Count(?)")]
         [LabelWidth(100)]
-        [OnValueChanged("FieldValueChanged")]
+        [OnValueChanged("OnFieldValueChanged")]
         [PropertyTooltip("循环次数，设定为负数一直循环执行")]
         private int _count;
 
@@ -39,7 +39,7 @@ namespace BTCore.Editor.Inspectors.Decorators
             return _repeater;
         }
         
-        protected override void FieldValueChanged() {
+        protected override void OnFieldValueChanged() {
             if (_repeater == null) {
                 return;
             }

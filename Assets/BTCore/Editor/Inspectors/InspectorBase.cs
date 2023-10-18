@@ -13,7 +13,7 @@ namespace BTCore.Editor.Inspectors
 {
     public abstract class InspectorBase : SerializedScriptableObject
     {
-        protected abstract void FieldValueChanged();
+        protected abstract void OnFieldValueChanged();
         
         public abstract void Reset();
     }
