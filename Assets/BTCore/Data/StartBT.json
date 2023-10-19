@@ -1,0 +1,494 @@
+{
+  "$type": "BTCore.Runtime.BTData, BTRuntime",
+  "TreeNodeData": {
+    "$type": "BTCore.Runtime.TreeNodeData, BTRuntime",
+    "Nodes": {
+      "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.BTNode, BTRuntime]], mscorlib",
+      "$values": [
+        {
+          "$type": "BTCore.Runtime.EntryNode, BTRuntime",
+          "ChildGuid": "679054cc-7046-4b12-9a87-935b7ae8f7c6",
+          "Name": "EntryNode",
+          "Guid": "9df9a43d-0371-4d19-98e0-202611bdd119",
+          "PosX": 225.0,
+          "PosY": 150.0
+        },
+        {
+          "$type": "BTCore.Runtime.Composites.Sequence, BTRuntime",
+          "ChildrenGuids": {
+            "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+            "$values": [
+              "f75de750-bdc6-434a-9b94-378d4039f921",
+              "b08900f4-2439-419b-92cd-432d25a1d1f7",
+              "350234af-04f5-4e67-b14b-3874384ecd3c",
+              "804483ab-6d41-4349-9367-e7fbcb85f967"
+            ]
+          },
+          "Name": "Sequence",
+          "Guid": "804436d1-95e7-46ce-87e9-1a70ce4631b0",
+          "PosX": -642.9032,
+          "PosY": 765.1134
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
+          "Message": {
+            "$type": "BTCore.Runtime.BindValue`1[[System.String, mscorlib]], BTRuntime",
+            "BindKeyName": "",
+            "RawValue": "Hello",
+            "Blackboard": {
+              "$type": "BTCore.Runtime.Blackboards.Blackboard, BTRuntime",
+              "Keys": {
+                "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
+                "$values": [
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.IntKey, BTRuntime",
+                    "Value": 50,
+                    "Name": "Probability",
+                    "Type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  },
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.StringKey, BTRuntime",
+                    "Value": "Start",
+                    "Name": "MyStr",
+                    "Type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  }
+                ]
+              }
+            },
+            "Value": "Hello"
+          },
+          "Name": "Log",
+          "Guid": "f75de750-bdc6-434a-9b94-378d4039f921",
+          "PosX": -732.9032,
+          "PosY": 917.1134
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
+          "Duration": 3000,
+          "Name": "Wait",
+          "Guid": "b08900f4-2439-419b-92cd-432d25a1d1f7",
+          "PosX": -587.903259,
+          "PosY": 917.1134
+        },
+        {
+          "$type": "BTCore.Runtime.Conditions.RandomProbability, BTRuntime",
+          "Probability": {
+            "$type": "BTCore.Runtime.BindValue`1[[System.Int32, mscorlib]], BTRuntime",
+            "BindKeyName": "Probability",
+            "RawValue": 0,
+            "Blackboard": {
+              "$type": "BTCore.Runtime.Blackboards.Blackboard, BTRuntime",
+              "Keys": {
+                "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
+                "$values": [
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.IntKey, BTRuntime",
+                    "Value": 50,
+                    "Name": "Probability",
+                    "Type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  },
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.StringKey, BTRuntime",
+                    "Value": "Start",
+                    "Name": "MyStr",
+                    "Type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  }
+                ]
+              }
+            },
+            "Value": 50
+          },
+          "Name": "RandomProbability",
+          "Guid": "350234af-04f5-4e67-b14b-3874384ecd3c",
+          "PosX": -441.9032,
+          "PosY": 917.1134
+        },
+        {
+          "$type": "BTCore.Runtime.Decorators.Repeater, BTRuntime",
+          "RepeatCount": 3,
+          "ChildGuid": "96d2699c-4313-4c61-8123-b09061b4f4c9",
+          "Name": "Repeater",
+          "Guid": "804483ab-6d41-4349-9367-e7fbcb85f967",
+          "PosX": -271.9032,
+          "PosY": 917.1134
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
+          "Message": {
+            "$type": "BTCore.Runtime.BindValue`1[[System.String, mscorlib]], BTRuntime",
+            "BindKeyName": "MyStr",
+            "RawValue": null,
+            "Blackboard": {
+              "$type": "BTCore.Runtime.Blackboards.Blackboard, BTRuntime",
+              "Keys": {
+                "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
+                "$values": [
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.IntKey, BTRuntime",
+                    "Value": 50,
+                    "Name": "Probability",
+                    "Type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  },
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.StringKey, BTRuntime",
+                    "Value": "Start",
+                    "Name": "MyStr",
+                    "Type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  }
+                ]
+              }
+            },
+            "Value": "Start"
+          },
+          "Name": "Log",
+          "Guid": "96d2699c-4313-4c61-8123-b09061b4f4c9",
+          "PosX": -271.9032,
+          "PosY": 1060.11353
+        },
+        {
+          "$type": "BTCore.Runtime.Composites.Selector, BTRuntime",
+          "ChildrenGuids": {
+            "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+            "$values": [
+              "0e072da9-2228-452e-98d7-1b1fa4db946d",
+              "42e97d25-fa3a-44f8-8d5d-08a569bd8a60",
+              "a0dacab1-9faa-4e78-a53a-cac82afcf2b8",
+              "cbdd1576-5b74-435e-81cb-23eafa1d263b"
+            ]
+          },
+          "Name": "Selector",
+          "Guid": "ac613c2f-ca30-40ad-a497-798e95d0d295",
+          "PosX": 844.689941,
+          "PosY": 808.7515
+        },
+        {
+          "$type": "BTCore.Runtime.Decorators.Failure, BTRuntime",
+          "ChildGuid": "83c9b932-7be3-4edf-b84b-7782bbf7f070",
+          "Name": "Failure",
+          "Guid": "0e072da9-2228-452e-98d7-1b1fa4db946d",
+          "PosX": 714.6899,
+          "PosY": 1009.75153
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
+          "Message": {
+            "$type": "BTCore.Runtime.BindValue`1[[System.String, mscorlib]], BTRuntime",
+            "BindKeyName": "",
+            "RawValue": "Hello",
+            "Blackboard": {
+              "$type": "BTCore.Runtime.Blackboards.Blackboard, BTRuntime",
+              "Keys": {
+                "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
+                "$values": [
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.IntKey, BTRuntime",
+                    "Value": 50,
+                    "Name": "Probability",
+                    "Type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  },
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.StringKey, BTRuntime",
+                    "Value": "Start",
+                    "Name": "MyStr",
+                    "Type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  }
+                ]
+              }
+            },
+            "Value": "Hello"
+          },
+          "Name": "Log",
+          "Guid": "83c9b932-7be3-4edf-b84b-7782bbf7f070",
+          "PosX": 714.6899,
+          "PosY": 1126.75146
+        },
+        {
+          "$type": "BTCore.Runtime.Decorators.Failure, BTRuntime",
+          "ChildGuid": "f066d001-32b2-4860-81ed-a68b99f697a4",
+          "Name": "Failure",
+          "Guid": "42e97d25-fa3a-44f8-8d5d-08a569bd8a60",
+          "PosX": 884.6898,
+          "PosY": 1009.75153
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
+          "Duration": 3000,
+          "Name": "Wait",
+          "Guid": "f066d001-32b2-4860-81ed-a68b99f697a4",
+          "PosX": 884.6898,
+          "PosY": 1126.75146
+        },
+        {
+          "$type": "BTCore.Runtime.Decorators.Repeater, BTRuntime",
+          "RepeatCount": 3,
+          "ChildGuid": "50b848cd-fd40-41c0-b662-2734cebd30e3",
+          "Name": "Repeater",
+          "Guid": "cbdd1576-5b74-435e-81cb-23eafa1d263b",
+          "PosX": 1224.69,
+          "PosY": 1009.75153
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
+          "Message": {
+            "$type": "BTCore.Runtime.BindValue`1[[System.String, mscorlib]], BTRuntime",
+            "BindKeyName": "MyStr",
+            "RawValue": null,
+            "Blackboard": {
+              "$type": "BTCore.Runtime.Blackboards.Blackboard, BTRuntime",
+              "Keys": {
+                "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
+                "$values": [
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.IntKey, BTRuntime",
+                    "Value": 50,
+                    "Name": "Probability",
+                    "Type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  },
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.StringKey, BTRuntime",
+                    "Value": "Start",
+                    "Name": "MyStr",
+                    "Type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  }
+                ]
+              }
+            },
+            "Value": "Start"
+          },
+          "Name": "Log",
+          "Guid": "50b848cd-fd40-41c0-b662-2734cebd30e3",
+          "PosX": 1224.69,
+          "PosY": 1152.75146
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
+          "Message": {
+            "$type": "BTCore.Runtime.BindValue`1[[System.String, mscorlib]], BTRuntime",
+            "BindKeyName": "",
+            "RawValue": "Succeed",
+            "Blackboard": {
+              "$type": "BTCore.Runtime.Blackboards.Blackboard, BTRuntime",
+              "Keys": {
+                "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
+                "$values": [
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.IntKey, BTRuntime",
+                    "Value": 50,
+                    "Name": "Probability",
+                    "Type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  },
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.StringKey, BTRuntime",
+                    "Value": "Start",
+                    "Name": "MyStr",
+                    "Type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  }
+                ]
+              }
+            },
+            "Value": "Succeed"
+          },
+          "Name": "Log",
+          "Guid": "a0dacab1-9faa-4e78-a53a-cac82afcf2b8",
+          "PosX": 1051.69,
+          "PosY": 1009.75153
+        },
+        {
+          "$type": "BTCore.Runtime.Composites.Parallel, BTRuntime",
+          "ChildrenGuids": {
+            "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+            "$values": [
+              "8b187a9a-f2d5-465a-a0cf-c8e2a58a0cb4",
+              "db459b26-408f-46c8-8095-684c70312d1b",
+              "2cbc7c59-e220-4873-ac48-e20de13c8c90",
+              "d6288e8b-3ad1-45c9-97b4-0ddee14648da"
+            ]
+          },
+          "Name": "Parallel",
+          "Guid": "679054cc-7046-4b12-9a87-935b7ae8f7c6",
+          "PosX": 225.0,
+          "PosY": 255.0
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
+          "Message": {
+            "$type": "BTCore.Runtime.BindValue`1[[System.String, mscorlib]], BTRuntime",
+            "BindKeyName": "MyStr",
+            "RawValue": null,
+            "Blackboard": {
+              "$type": "BTCore.Runtime.Blackboards.Blackboard, BTRuntime",
+              "Keys": {
+                "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
+                "$values": [
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.IntKey, BTRuntime",
+                    "Value": 50,
+                    "Name": "Probability",
+                    "Type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  },
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.StringKey, BTRuntime",
+                    "Value": "Start",
+                    "Name": "MyStr",
+                    "Type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  }
+                ]
+              }
+            },
+            "Value": "Start"
+          },
+          "Name": "Log",
+          "Guid": "8b187a9a-f2d5-465a-a0cf-c8e2a58a0cb4",
+          "PosX": -74.21475,
+          "PosY": 422.083527
+        },
+        {
+          "$type": "BTCore.Runtime.Composites.Sequence, BTRuntime",
+          "ChildrenGuids": {
+            "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+            "$values": [
+              "21fdd033-397b-47fd-821f-2f46586fa842",
+              "7185ac59-ba9b-41d9-a7a8-8c45083e72f8"
+            ]
+          },
+          "Name": "Sequence",
+          "Guid": "db459b26-408f-46c8-8095-684c70312d1b",
+          "PosX": 140.785248,
+          "PosY": 422.083527
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
+          "Duration": 5000,
+          "Name": "Wait",
+          "Guid": "21fdd033-397b-47fd-821f-2f46586fa842",
+          "PosX": 55.7852478,
+          "PosY": 552.0835
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
+          "Message": {
+            "$type": "BTCore.Runtime.BindValue`1[[System.String, mscorlib]], BTRuntime",
+            "BindKeyName": "",
+            "RawValue": "5S后打印Log",
+            "Blackboard": {
+              "$type": "BTCore.Runtime.Blackboards.Blackboard, BTRuntime",
+              "Keys": {
+                "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
+                "$values": [
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.IntKey, BTRuntime",
+                    "Value": 50,
+                    "Name": "Probability",
+                    "Type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  },
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.StringKey, BTRuntime",
+                    "Value": "Start",
+                    "Name": "MyStr",
+                    "Type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  }
+                ]
+              }
+            },
+            "Value": "5S后打印Log"
+          },
+          "Name": "Log",
+          "Guid": "7185ac59-ba9b-41d9-a7a8-8c45083e72f8",
+          "PosX": 225.000076,
+          "PosY": 552.0
+        },
+        {
+          "$type": "BTCore.Runtime.Decorators.Inverter, BTRuntime",
+          "ChildGuid": "f592c56d-0eb6-46f2-b942-15c5b4d4b54a",
+          "Name": "Inverter",
+          "Guid": "2cbc7c59-e220-4873-ac48-e20de13c8c90",
+          "PosX": 389.0,
+          "PosY": 422.0
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
+          "Duration": 6000,
+          "Name": "Wait",
+          "Guid": "f592c56d-0eb6-46f2-b942-15c5b4d4b54a",
+          "PosX": 388.785248,
+          "PosY": 552.0835
+        },
+        {
+          "$type": "BTCore.Runtime.Composites.Sequence, BTRuntime",
+          "ChildrenGuids": {
+            "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+            "$values": [
+              "f4008867-b518-4c2d-a361-d6d7a1ffd0f8",
+              "08942466-f9e6-495f-9444-26a546a295f3"
+            ]
+          },
+          "Name": "Sequence",
+          "Guid": "d6288e8b-3ad1-45c9-97b4-0ddee14648da",
+          "PosX": 587.785156,
+          "PosY": 422.083527
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
+          "Duration": 3000,
+          "Name": "Wait",
+          "Guid": "f4008867-b518-4c2d-a361-d6d7a1ffd0f8",
+          "PosX": 545.7853,
+          "PosY": 552.0835
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
+          "Message": {
+            "$type": "BTCore.Runtime.BindValue`1[[System.String, mscorlib]], BTRuntime",
+            "BindKeyName": "",
+            "RawValue": "3S后打印Log",
+            "Blackboard": {
+              "$type": "BTCore.Runtime.Blackboards.Blackboard, BTRuntime",
+              "Keys": {
+                "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
+                "$values": [
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.IntKey, BTRuntime",
+                    "Value": 50,
+                    "Name": "Probability",
+                    "Type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  },
+                  {
+                    "$type": "BTCore.Runtime.Blackboards.StringKey, BTRuntime",
+                    "Value": "Start",
+                    "Name": "MyStr",
+                    "Type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                  }
+                ]
+              }
+            },
+            "Value": "3S后打印Log"
+          },
+          "Name": "Log",
+          "Guid": "08942466-f9e6-495f-9444-26a546a295f3",
+          "PosX": 701.0,
+          "PosY": 552.0
+        }
+      ]
+    }
+  },
+  "Blackboard": {
+    "$type": "BTCore.Runtime.Blackboards.Blackboard, BTRuntime",
+    "Keys": {
+      "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
+      "$values": [
+        {
+          "$type": "BTCore.Runtime.Blackboards.IntKey, BTRuntime",
+          "Value": 50,
+          "Name": "Probability",
+          "Type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        },
+        {
+          "$type": "BTCore.Runtime.Blackboards.StringKey, BTRuntime",
+          "Value": "Start",
+          "Name": "MyStr",
+          "Type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        }
+      ]
+    }
+  }
+}

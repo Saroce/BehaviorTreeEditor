@@ -8,8 +8,9 @@
 //============================================================
 
 using System;
+using BTCore.Runtime.Externals;
 
-namespace BTCore.Runtime.Externals.Example
+namespace Examples.ExternalNode
 {
     /// <summary>
     /// 测试类型，实际项目中需要替换为外部工程中的Condition类型

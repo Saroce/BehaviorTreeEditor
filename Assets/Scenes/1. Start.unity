@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 601172402}
   - component: {fileID: 601172401}
   m_Layer: 0
-  m_Name: BTRunner
+  m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,6 +8,7 @@
 //============================================================
 
 using System.Collections.Generic;
+using System.Linq;
 using BTCore.Runtime.Actions;
 
 namespace BTCore.Runtime.Externals
@@ -32,6 +33,11 @@ namespace BTCore.Runtime.Externals
 
         protected override void OnStop() {
             
+        }
+
+        public override string ToString() {
+            var propertiesDump = Properties.Aggregate("Properties: ", (current, pair) => current + $"key: {pair.Key} value: {pair.Value}");
+            return $"External condition typeName: {TypeName} {propertiesDump}";
         }
     }
 }

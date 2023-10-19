@@ -9,8 +9,9 @@
 
 using System;
 using System.Collections.Generic;
+using BTCore.Runtime.Externals;
 
-namespace BTCore.Runtime.Externals.Example
+namespace Examples.ExternalNode
 {
     public class ExternalNodeFactory
     {

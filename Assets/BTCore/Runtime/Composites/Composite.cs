@@ -23,5 +23,7 @@ namespace BTCore.Runtime.Composites
         public void AddChild(BTNode node) {
             Children.Add(node);
         }
+
+        public List<BTNode> GetChildren() => Children;
     }
 }

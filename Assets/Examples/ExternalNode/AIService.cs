@@ -8,9 +8,11 @@
 //============================================================
 
 using System;
+using BTCore.Runtime;
+using BTCore.Runtime.Externals;
 using Newtonsoft.Json;
 
-namespace BTCore.Runtime.Externals.Example
+namespace Examples.ExternalNode
 {
     public interface IAIService
     {

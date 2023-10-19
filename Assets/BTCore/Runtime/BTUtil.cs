@@ -7,42 +7,53 @@
 //    Modified:  2023-10-11
 //============================================================
 
+using System;
 using System.Collections.Generic;
 using BTCore.Runtime.Composites;
+using BTCore.Runtime.Conditions;
 using BTCore.Runtime.Decorators;
 
 namespace BTCore.Runtime
 {
     public static class BTUtil
     {
-        // /// <summary>
-        // /// 给定行为树的根节点，获取对应的所有节点
-        // /// </summary>
-        // /// <param name="rootNode"></param>
-        // /// <returns></returns>
-        // public static List<BTNode> GetTreeNodes(BTNode rootNode) {
-        //     var nodes = new List<BTNode>();
-        //     if (rootNode == null) {
-        //         return nodes;
-        //     }
-        //
-        //     nodes.Add(rootNode);
-        //
-        //     switch (rootNode) {
-        //         case EntryNode entryNode:
-        //             nodes.AddRange(GetTreeNodes(entryNode.Child));
-        //             break;
-        //         case Composite composite:
-        //             foreach (var child in composite.Children) {
-        //                 nodes.AddRange(GetTreeNodes(child));
-        //             }
-        //             break;
-        //         case Decorator decorator:
-        //             nodes.AddRange(GetTreeNodes(decorator.Child));
-        //             break;
-        //     }
-        //
-        //     return nodes;
-        // }
+        public static void TravelNode(BTNode root, Action<BTNode> traveller) {
+            if (root == null) {
+                return;
+            }
+            
+            traveller(root);
+            root.GetChildren().ForEach(child => TravelNode(child, traveller));
+        }
+
+        public static List<BTNode> GetChildren(this BTNode parent) {
+            var children = new List<BTNode>();
+            if (parent == null) {
+                return children;
+            }
+
+            switch (parent) {
+                case EntryNode entryNode: {
+                    var child = entryNode.GetChild();
+                    if (child != null) {
+                        children.Add(child);
+                    }
+                    break;
+                }
+                case Composite composite: {
+                    children.AddRange(composite.GetChildren());
+                    break;
+                }
+                case Decorator decorator: {
+                    var child = decorator.GetChild();
+                    if (child != null) {
+                        children.Add(child);
+                    }
+                    break;
+                }
+            }
+
+            return children;
+        }
     }
 }

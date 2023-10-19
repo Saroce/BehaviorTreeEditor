@@ -46,6 +46,7 @@ namespace BTCore.Runtime
             return State;
         }
 
+        
         public virtual void OnInit(Blackboard blackboard) {
             Blackboard = blackboard;
             
@@ -62,6 +63,14 @@ namespace BTCore.Runtime
                     fieldInfo?.SetValue(bindValue, blackboard);
                 }
             }   
+        }
+
+        public void Abort() {
+            BTUtil.TravelNode(this, node => {
+                node._started = false;
+                node.State = NodeState.Inactive;
+                node.OnStop();
+            });
         }
         
         protected abstract void OnStart();

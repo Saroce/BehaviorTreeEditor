@@ -20,6 +20,8 @@ namespace BTCore.Runtime.Decorators
         public void SetChild(BTNode node) {
             Child = node;
         }
+
+        public BTNode GetChild() => Child;
     }
 }
 

@@ -15,7 +15,7 @@ namespace BTCore.Runtime.Composites
 {
     public class Parallel : Composite
     {
-        private List<NodeState> _childrenState = new List<NodeState>();
+        private readonly List<NodeState> _childrenState = new List<NodeState>();
 
         protected override void OnStart() {
             childIndex = 0;
@@ -27,6 +27,7 @@ namespace BTCore.Runtime.Composites
             var childrenComplete = true;
             for (var i = 0; i < _childrenState.Count; i++) {
                 var nodeState = _childrenState[i];
+                
                 switch (nodeState) {
                     case NodeState.Inactive:
                     case NodeState.Running: {
@@ -35,7 +36,7 @@ namespace BTCore.Runtime.Composites
                         break;
                     }
                     case NodeState.Failure: {
-                        // TODO 中断正在运行的子节点
+                        AbortRunningChildren();
                         return NodeState.Failure;
                     }
                     case NodeState.Success:
@@ -50,6 +51,16 @@ namespace BTCore.Runtime.Composites
 
         protected override void OnStop() {
             
+        }
+
+        private void AbortRunningChildren() {
+            for (var i = 0; i < _childrenState.Count; i++) {
+                if (_childrenState[i] != NodeState.Running) {
+                    continue;
+                }
+                
+                Children[i].Abort();
+            }
         }
     }
 }

@@ -1,40 +1,33 @@
 ﻿//------------------------------------------------------------
-//        File:  BehaviorTree.cs
-//       Brief:  BehaviorTree
+//        File:  ExternalNodeLauncher.cs
+//       Brief:  外部节点类型使用测试
 //
 //      Author:  Saroce, Saroce233@163.com
 //
-//    Modified:  2023-10-01
+//    Modified:  2023-10-18
 //============================================================
 
-using System;
-using Newtonsoft.Json;
+using BTCore.Runtime;
 using UnityEngine;
 
-namespace BTCore.Runtime.Unity
+namespace Examples.ExternalNode
 {
-    public class BehaviorTree : MonoBehaviour
+    public class ExternalNodeLauncher : MonoBehaviour
     {
         [SerializeField]
         private TextAsset _btAsset;
-        
-        public BTData BTData { get; private set; }
-
+    
+        private IAIAgent _aiAgent;
+        private readonly IAIService _aiService = new AIService();
+    
         private void Start() {
             Application.targetFrameRate = 60;
             BTLogger.OnLogReceived += OnLogReceived;
-
-            try {
-                BTData = JsonConvert.DeserializeObject<BTData>(_btAsset.text, BTDef.SerializerSettingsAuto);
-                BTData?.RebuildTree();
-            }
-            catch (Exception e) {
-                Debug.LogError($"BT data deserialize failed, please check bt asset file!\n{e}");
-            }
+            _aiAgent = _aiService.CreateAIAgent(_btAsset.text);
         }
 
         private void Update() {
-            BTData?.Update((int) (Time.deltaTime * 1000));
+            _aiAgent?.Tick((int) (Time.deltaTime * 1000));
         }
         
         private void OnLogReceived(string message, BTLogType logType) {

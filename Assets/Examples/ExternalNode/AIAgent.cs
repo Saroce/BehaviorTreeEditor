@@ -7,7 +7,9 @@
 //    Modified:  2023-10-18
 //============================================================
 
-namespace BTCore.Runtime.Externals.Example
+using BTCore.Runtime;
+
+namespace Examples.ExternalNode
 {
     public interface IAIAgent
     {

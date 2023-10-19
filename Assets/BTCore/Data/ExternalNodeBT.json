@@ -21,7 +21,10 @@
               "daea9dfd-4e65-4742-bc36-9e675ce9f46f",
               "86548117-a2b8-403e-909e-467bd4fd47f6",
               "2e04f77a-2b67-4fde-afc3-1d1c7f6de181",
-              "6a679249-40ef-44e7-a615-36e7b4caad1e"
+              "6a679249-40ef-44e7-a615-36e7b4caad1e",
+              "88e0b77d-665e-4afd-b752-b403e16817ea",
+              "bddf4f67-616c-4acf-92bc-57a011fc7833",
+              "eb749d32-a7d4-49ce-a6ee-9e0d6f963e9e"
             ]
           },
           "Name": "Sequence",
@@ -38,8 +41,8 @@
           },
           "Name": "ExternalAction",
           "Guid": "56830467-1447-4e69-a99b-d3f5958a41e1",
-          "PosX": 523.2,
-          "PosY": 536.800049
+          "PosX": 302.856262,
+          "PosY": 554.4861
         },
         {
           "$type": "BTCore.Runtime.Externals.ExternalCondition, BTRuntime",
@@ -50,8 +53,8 @@
           },
           "Name": "ExternalCondition",
           "Guid": "86548117-a2b8-403e-909e-467bd4fd47f6",
-          "PosX": 167.0,
-          "PosY": 411.0
+          "PosX": -28.1437378,
+          "PosY": 435.486053
         },
         {
           "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
@@ -70,16 +73,16 @@
           },
           "Name": "Log",
           "Guid": "daea9dfd-4e65-4742-bc36-9e675ce9f46f",
-          "PosX": -8.040009,
-          "PosY": 411.0
+          "PosX": -195.143768,
+          "PosY": 435.486053
         },
         {
           "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
           "Duration": 3000,
           "Name": "Wait",
           "Guid": "2e04f77a-2b67-4fde-afc3-1d1c7f6de181",
-          "PosX": 343.199982,
-          "PosY": 410.4
+          "PosX": 145.150055,
+          "PosY": 434.000061
         },
         {
           "$type": "BTCore.Runtime.Decorators.Repeater, BTRuntime",
@@ -87,8 +90,40 @@
           "ChildGuid": "56830467-1447-4e69-a99b-d3f5958a41e1",
           "Name": "Repeater",
           "Guid": "6a679249-40ef-44e7-a615-36e7b4caad1e",
-          "PosX": 523.832031,
-          "PosY": 410.4
+          "PosX": 303.0,
+          "PosY": 434.0
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
+          "Duration": 1000,
+          "Name": "Wait",
+          "Guid": "88e0b77d-665e-4afd-b752-b403e16817ea",
+          "PosX": 460.0,
+          "PosY": 434.0
+        },
+        {
+          "$type": "BTCore.Runtime.Externals.ExternalCondition, BTRuntime",
+          "TypeName": "MyCondition",
+          "Properties": {
+            "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
+            "CanPass": "false"
+          },
+          "Name": "ExternalCondition",
+          "Guid": "bddf4f67-616c-4acf-92bc-57a011fc7833",
+          "PosX": 624.000061,
+          "PosY": 434.000061
+        },
+        {
+          "$type": "BTCore.Runtime.Externals.ExternalAction, BTRuntime",
+          "TypeName": "MyAction",
+          "Properties": {
+            "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
+            "Name": "End"
+          },
+          "Name": "ExternalAction",
+          "Guid": "eb749d32-a7d4-49ce-a6ee-9e0d6f963e9e",
+          "PosX": 790.8562,
+          "PosY": 435.486053
         }
       ]
     }

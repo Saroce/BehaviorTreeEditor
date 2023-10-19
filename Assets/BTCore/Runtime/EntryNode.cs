@@ -20,6 +20,8 @@ namespace BTCore.Runtime
         public void SetChild(BTNode node) {
             _child = node;
         }
+
+        public BTNode GetChild() => _child;
         
         protected override void OnStart() {
             

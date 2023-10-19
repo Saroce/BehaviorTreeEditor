@@ -7,7 +7,10 @@
 //    Modified:  2023-10-18
 //============================================================
 
-namespace BTCore.Runtime.Externals.Example
+using BTCore.Runtime;
+using BTCore.Runtime.Externals;
+
+namespace Examples.ExternalNode
 {
     /// <summary>
     /// 测试类型，实际项目中需要替换为外部工程中的Action类型

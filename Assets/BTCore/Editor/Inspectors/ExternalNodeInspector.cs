@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using BTCore.Runtime;
 using BTCore.Runtime.Externals;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace BTCore.Editor.Inspectors
 {
@@ -21,7 +22,7 @@ namespace BTCore.Editor.Inspectors
         [LabelText("TypeName")]
         [LabelWidth(100)]
         [OnValueChanged("OnFieldValueChanged")]
-        [ValidateInput("StringValidator", "$GetInfoMessage")]
+        [ValidateInput("StringValidator", "$GetInfoMessage", ContinuousValidationCheck = true)]
         protected string TypeName;
 
         [ShowInInspector]

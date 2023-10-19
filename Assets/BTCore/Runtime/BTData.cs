@@ -25,6 +25,7 @@ namespace BTCore.Runtime
         
         /// <summary>
         /// deltaTime为服务端Tick一次的时间间隔，或者帧同步的帧间隔时间，单位为ms
+        /// 注意：Unity里面跑，帧率太快的话，会导致类型转换丢失时间，可能跟实际对不上
         /// </summary>
         /// <param name="deltaTime"></param>
         /// <returns></returns>
