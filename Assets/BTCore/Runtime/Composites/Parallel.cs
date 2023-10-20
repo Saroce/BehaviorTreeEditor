@@ -31,7 +31,7 @@ namespace BTCore.Runtime.Composites
                 switch (nodeState) {
                     case NodeState.Inactive:
                     case NodeState.Running: {
-                        _childrenState[i] = Children[i].Update(DeltaTime);
+                        _childrenState[i] = Children[i].Update();
                         childrenComplete = false;
                         break;
                     }

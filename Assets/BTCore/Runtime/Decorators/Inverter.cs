@@ -21,7 +21,7 @@ namespace BTCore.Runtime.Decorators
                 return NodeState.Failure;
             }
 
-            var nodeState = Child.Update(DeltaTime);
+            var nodeState = Child.Update();
             switch (nodeState) {
                 case NodeState.Inactive:
                 case NodeState.Running:

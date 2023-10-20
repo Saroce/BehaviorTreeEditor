@@ -18,5 +18,9 @@ namespace BTCore.Editor.Inspectors.Conditions
         protected override string GetInfoMessage() {
             return "必须填写外部Condition类型名称!";
         }
+
+        protected override string GetTitleName() {
+            return "External Condition";
+        }
     }
 }

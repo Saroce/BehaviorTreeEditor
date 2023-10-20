@@ -19,21 +19,24 @@ namespace BTCore.Runtime
     {
         public TreeNodeData TreeNodeData = new TreeNodeData();
         public Blackboard Blackboard = new Blackboard();
+        public BTSettings Settings = new BTSettings();
         
         [NonSerialized]
         public NodeState TreeState = NodeState.Inactive;
         
-        /// <summary>
-        /// deltaTime为服务端Tick一次的时间间隔，或者帧同步的帧间隔时间，单位为ms
-        /// 注意：Unity里面跑，帧率太快的话，会导致类型转换丢失时间，可能跟实际对不上
-        /// </summary>
-        /// <param name="deltaTime"></param>
-        /// <returns></returns>
-        public NodeState Update(int deltaTime) {
-            if (TreeNodeData.EntryNode != null && TreeState is NodeState.Inactive or NodeState.Running) {
-                TreeState = TreeNodeData.EntryNode.Update(deltaTime);
+        public NodeState Update() {
+            if (TreeNodeData.EntryNode == null) {
+                return NodeState.Failure;
             }
             
+            if (TreeState is NodeState.Inactive or NodeState.Running) {
+                TreeState = TreeNodeData.EntryNode.Update();
+            }
+            else if (Settings.RestartWhenComplete) {
+                TreeNodeData.EntryNode.Abort();
+                TreeState = NodeState.Inactive;
+            }
+
             return TreeState;
         }
 

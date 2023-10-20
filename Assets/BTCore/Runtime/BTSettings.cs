@@ -1,16 +1,17 @@
 ﻿//------------------------------------------------------------
-//        File:  IBTNode.cs
-//       Brief:  IBTNode
+//        File:  BTSettings.cs
+//       Brief:  BTSettings
 //
 //      Author:  Saroce, Saroce233@163.com
 //
-//    Modified:  2023-09-29
+//    Modified:  2023-10-20
 //============================================================
 
 namespace BTCore.Runtime
 {
-    public interface IBTNode : INode
+    // TODO 缺少编辑器设置面板
+    public class BTSettings
     {
-        NodeState Update();
+        public bool RestartWhenComplete = false;
     }
 }

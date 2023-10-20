@@ -19,7 +19,7 @@ namespace BTCore.Runtime.Decorators
                 return NodeState.Failure;
             }
 
-            var nodeState = Child.Update(DeltaTime);
+            var nodeState = Child.Update();
             return nodeState == NodeState.Success ? NodeState.Failure : nodeState;
         }
 

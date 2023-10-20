@@ -67,7 +67,8 @@ namespace BTCore.Editor
             // Node Inspector字段须在Reset里面重新进行初始化
             inspector.Reset();
             inspector.ImportData(nodeView.Node);
-
+            inspector.OnNodeViewUpdate = nodeView.UpdateView;
+            
             _container.onGUIHandler = () => {
                 if (editor.target) {
                     editor.OnInspectorGUI();

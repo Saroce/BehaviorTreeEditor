@@ -21,6 +21,10 @@ namespace BTCore.Runtime.Composites
         public List<string> ChildrenGuids = new List<string>();
 
         public void AddChild(BTNode node) {
+            if (node == null) {
+                return;
+            }
+            
             Children.Add(node);
         }
 

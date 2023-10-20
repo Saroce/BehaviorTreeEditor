@@ -25,7 +25,7 @@ namespace BTCore.Runtime.Decorators
             }
             
             if (RepeatCount < 0) {
-                Child.Update(DeltaTime);
+                Child.Update();
                 return NodeState.Running;
             }
 
@@ -34,7 +34,7 @@ namespace BTCore.Runtime.Decorators
             }
 
             _counter++;
-            var nodeState = Child.Update(DeltaTime);
+            var nodeState = Child.Update();
             return nodeState != NodeState.Success ? nodeState : NodeState.Running;
         }
 

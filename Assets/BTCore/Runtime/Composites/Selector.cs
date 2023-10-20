@@ -21,7 +21,7 @@ namespace BTCore.Runtime.Composites
         protected override NodeState OnUpdate() {
             for (var i = childIndex; i < Children.Count; i++) {
                 childIndex = i;
-                var nodeState = Children[i].Update(DeltaTime);
+                var nodeState = Children[i].Update();
                 
                 switch (nodeState) {
                     case NodeState.Inactive:

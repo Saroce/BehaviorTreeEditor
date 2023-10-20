@@ -7,7 +7,7 @@
       "$values": [
         {
           "$type": "BTCore.Runtime.EntryNode, BTRuntime",
-          "ChildGuid": "679054cc-7046-4b12-9a87-935b7ae8f7c6",
+          "ChildGuid": "804436d1-95e7-46ce-87e9-1a70ce4631b0",
           "Name": "EntryNode",
           "Guid": "9df9a43d-0371-4d19-98e0-202611bdd119",
           "PosX": 225.0,
@@ -21,13 +21,14 @@
               "f75de750-bdc6-434a-9b94-378d4039f921",
               "b08900f4-2439-419b-92cd-432d25a1d1f7",
               "350234af-04f5-4e67-b14b-3874384ecd3c",
+              "f7c3d960-8f05-4858-a22e-1484a1ab063a",
               "804483ab-6d41-4349-9367-e7fbcb85f967"
             ]
           },
           "Name": "Sequence",
           "Guid": "804436d1-95e7-46ce-87e9-1a70ce4631b0",
-          "PosX": -642.9032,
-          "PosY": 765.1134
+          "PosX": 225.0,
+          "PosY": 299.0
         },
         {
           "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
@@ -59,16 +60,16 @@
           },
           "Name": "Log",
           "Guid": "f75de750-bdc6-434a-9b94-378d4039f921",
-          "PosX": -732.9032,
-          "PosY": 917.1134
+          "PosX": 22.0,
+          "PosY": 496.0
         },
         {
           "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
           "Duration": 3000,
           "Name": "Wait",
           "Guid": "b08900f4-2439-419b-92cd-432d25a1d1f7",
-          "PosX": -587.903259,
-          "PosY": 917.1134
+          "PosX": 167.0,
+          "PosY": 496.0
         },
         {
           "$type": "BTCore.Runtime.Conditions.RandomProbability, BTRuntime",
@@ -100,8 +101,8 @@
           },
           "Name": "RandomProbability",
           "Guid": "350234af-04f5-4e67-b14b-3874384ecd3c",
-          "PosX": -441.9032,
-          "PosY": 917.1134
+          "PosX": 313.0,
+          "PosY": 496.0
         },
         {
           "$type": "BTCore.Runtime.Decorators.Repeater, BTRuntime",
@@ -109,8 +110,8 @@
           "ChildGuid": "96d2699c-4313-4c61-8123-b09061b4f4c9",
           "Name": "Repeater",
           "Guid": "804483ab-6d41-4349-9367-e7fbcb85f967",
-          "PosX": -271.9032,
-          "PosY": 917.1134
+          "PosX": 654.0,
+          "PosY": 496.0
         },
         {
           "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
@@ -142,8 +143,8 @@
           },
           "Name": "Log",
           "Guid": "96d2699c-4313-4c61-8123-b09061b4f4c9",
-          "PosX": -271.9032,
-          "PosY": 1060.11353
+          "PosX": 654.0,
+          "PosY": 639.0
         },
         {
           "$type": "BTCore.Runtime.Composites.Selector, BTRuntime",
@@ -306,8 +307,8 @@
           },
           "Name": "Parallel",
           "Guid": "679054cc-7046-4b12-9a87-935b7ae8f7c6",
-          "PosX": 225.0,
-          "PosY": 255.0
+          "PosX": -461.402527,
+          "PosY": 846.5001
         },
         {
           "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
@@ -339,8 +340,8 @@
           },
           "Name": "Log",
           "Guid": "8b187a9a-f2d5-465a-a0cf-c8e2a58a0cb4",
-          "PosX": -74.21475,
-          "PosY": 422.083527
+          "PosX": -760.4026,
+          "PosY": 1013.50012
         },
         {
           "$type": "BTCore.Runtime.Composites.Sequence, BTRuntime",
@@ -353,16 +354,16 @@
           },
           "Name": "Sequence",
           "Guid": "db459b26-408f-46c8-8095-684c70312d1b",
-          "PosX": 140.785248,
-          "PosY": 422.083527
+          "PosX": -545.4026,
+          "PosY": 1013.50012
         },
         {
           "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
           "Duration": 5000,
           "Name": "Wait",
           "Guid": "21fdd033-397b-47fd-821f-2f46586fa842",
-          "PosX": 55.7852478,
-          "PosY": 552.0835
+          "PosX": -630.4026,
+          "PosY": 1143.50012
         },
         {
           "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
@@ -394,24 +395,24 @@
           },
           "Name": "Log",
           "Guid": "7185ac59-ba9b-41d9-a7a8-8c45083e72f8",
-          "PosX": 225.000076,
-          "PosY": 552.0
+          "PosX": -461.402527,
+          "PosY": 1143.50012
         },
         {
           "$type": "BTCore.Runtime.Decorators.Inverter, BTRuntime",
           "ChildGuid": "f592c56d-0eb6-46f2-b942-15c5b4d4b54a",
           "Name": "Inverter",
           "Guid": "2cbc7c59-e220-4873-ac48-e20de13c8c90",
-          "PosX": 389.0,
-          "PosY": 422.0
+          "PosX": -297.402557,
+          "PosY": 1013.50012
         },
         {
           "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
           "Duration": 6000,
           "Name": "Wait",
           "Guid": "f592c56d-0eb6-46f2-b942-15c5b4d4b54a",
-          "PosX": 388.785248,
-          "PosY": 552.0835
+          "PosX": -297.402557,
+          "PosY": 1143.50012
         },
         {
           "$type": "BTCore.Runtime.Composites.Sequence, BTRuntime",
@@ -424,16 +425,16 @@
           },
           "Name": "Sequence",
           "Guid": "d6288e8b-3ad1-45c9-97b4-0ddee14648da",
-          "PosX": 587.785156,
-          "PosY": 422.083527
+          "PosX": -98.40261,
+          "PosY": 1013.50012
         },
         {
           "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
           "Duration": 3000,
           "Name": "Wait",
           "Guid": "f4008867-b518-4c2d-a361-d6d7a1ffd0f8",
-          "PosX": 545.7853,
-          "PosY": 552.0835
+          "PosX": -140.402573,
+          "PosY": 1143.50012
         },
         {
           "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
@@ -465,8 +466,16 @@
           },
           "Name": "Log",
           "Guid": "08942466-f9e6-495f-9444-26a546a295f3",
-          "PosX": 701.0,
-          "PosY": 552.0
+          "PosX": 14.5974464,
+          "PosY": 1143.50012
+        },
+        {
+          "$type": "BTCore.Runtime.Actions.Wait, BTRuntime",
+          "Duration": 1000,
+          "Name": "Wait",
+          "Guid": "f7c3d960-8f05-4858-a22e-1484a1ab063a",
+          "PosX": 486.0,
+          "PosY": 496.0
         }
       ]
     }
@@ -490,5 +499,9 @@
         }
       ]
     }
+  },
+  "Settings": {
+    "$type": "BTCore.Runtime.BTSettings, BTRuntime",
+    "RestartWhenComplete": true
   }
 }

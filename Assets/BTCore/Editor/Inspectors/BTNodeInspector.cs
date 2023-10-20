@@ -7,13 +7,17 @@
 //    Modified:  2023-10-08
 //============================================================
 
+using System;
 using BTCore.Runtime;
-using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace BTCore.Editor.Inspectors
 {
     public abstract class BTNodeInspector : InspectorBase, IDataSerializableEditor<BTNode>
     {
+        [HideInInspector]
+        public Action OnNodeViewUpdate;
+        
         public abstract void ImportData(BTNode data);
 
         public abstract BTNode ExportData();

@@ -28,7 +28,7 @@ namespace BTCore.Runtime
         }
 
         protected override NodeState OnUpdate() {
-            return _child?.Update(DeltaTime) ?? NodeState.Failure;
+            return _child?.Update() ?? NodeState.Failure;
         }
 
         protected override void OnStop() {

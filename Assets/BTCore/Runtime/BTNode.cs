@@ -24,13 +24,10 @@ namespace BTCore.Runtime
         public NodeState State = NodeState.Inactive;
         
         protected Blackboard Blackboard;
-        protected int DeltaTime { private set; get; } // 增量时间(ms)
 
         private bool _started;
         
-        public NodeState Update(int deltaTime) {
-            DeltaTime = deltaTime;
-            
+        public NodeState Update() {
             if (!_started) {
                 OnStart();
                 _started = true;

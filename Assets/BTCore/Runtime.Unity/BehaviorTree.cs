@@ -34,7 +34,7 @@ namespace BTCore.Runtime.Unity
         }
 
         private void Update() {
-            BTData?.Update((int) (Time.deltaTime * 1000));
+            BTData?.Update();
         }
         
         private void OnLogReceived(string message, BTLogType logType) {

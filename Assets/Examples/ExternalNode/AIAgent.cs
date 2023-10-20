@@ -13,7 +13,7 @@ namespace Examples.ExternalNode
 {
     public interface IAIAgent
     {
-        void Tick(int deltaTime);
+        void Tick();
     }
     
     public class AIAgent : IAIAgent
@@ -24,8 +24,8 @@ namespace Examples.ExternalNode
             _btData = btData;
         }
         
-        public void Tick(int deltaTime) {
-            _btData?.Update(deltaTime);
+        public void Tick() {
+            _btData?.Update();
         }
     }
 }

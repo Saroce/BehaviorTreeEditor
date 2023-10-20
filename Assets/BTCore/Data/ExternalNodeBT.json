@@ -39,7 +39,7 @@
             "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
             "Name": "World"
           },
-          "Name": "ExternalAction",
+          "Name": "MyAction",
           "Guid": "56830467-1447-4e69-a99b-d3f5958a41e1",
           "PosX": 302.856262,
           "PosY": 554.4861
@@ -51,10 +51,10 @@
             "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
             "CanPass": "true"
           },
-          "Name": "ExternalCondition",
+          "Name": "MyCondition",
           "Guid": "86548117-a2b8-403e-909e-467bd4fd47f6",
-          "PosX": -28.1437378,
-          "PosY": 435.486053
+          "PosX": -28.0,
+          "PosY": 434.0
         },
         {
           "$type": "BTCore.Runtime.Actions.Log, BTRuntime",
@@ -108,7 +108,7 @@
             "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
             "CanPass": "false"
           },
-          "Name": "ExternalCondition",
+          "Name": "MyCondition",
           "Guid": "bddf4f67-616c-4acf-92bc-57a011fc7833",
           "PosX": 624.000061,
           "PosY": 434.000061
@@ -120,10 +120,10 @@
             "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
             "Name": "End"
           },
-          "Name": "ExternalAction",
+          "Name": "MyAction",
           "Guid": "eb749d32-a7d4-49ce-a6ee-9e0d6f963e9e",
-          "PosX": 790.8562,
-          "PosY": 435.486053
+          "PosX": 792.0,
+          "PosY": 435.0
         }
       ]
     }
@@ -134,5 +134,9 @@
       "$type": "System.Collections.Generic.List`1[[BTCore.Runtime.Blackboards.BlackboardKey, BTRuntime]], mscorlib",
       "$values": []
     }
+  },
+  "Settings": {
+    "$type": "BTCore.Runtime.BTSettings, BTRuntime",
+    "RestartWhenComplete": true
   }
 }

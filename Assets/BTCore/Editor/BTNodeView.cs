@@ -46,6 +46,15 @@ namespace BTCore.Editor
             _btView = btView;
         }
 
+        public void UpdateView() {
+            if (Node == null) {
+                return;
+            }
+
+            // 目前只有title属性有刷新需求，其他需要再加
+            title = Node.Name;
+        }
+
         public void ImportData(BTNode data) {
             Node = data;
             title = data.Name;

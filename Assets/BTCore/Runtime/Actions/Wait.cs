@@ -15,15 +15,15 @@ namespace BTCore.Runtime.Actions
     {
         public int Duration = 1000;    // 等待时长(单位ms)
         
-        private int _elapsedTime;
+        private DateTime _startTime;
         
         protected override void OnStart() {
-            _elapsedTime = 0;
+            _startTime = DateTime.UtcNow;
         }
 
         protected override NodeState OnUpdate() {
-            _elapsedTime += DeltaTime;
-            return _elapsedTime > Duration ? NodeState.Success : NodeState.Running;
+            var elapsedTime = (DateTime.UtcNow - _startTime).TotalMilliseconds;
+            return elapsedTime > Duration ? NodeState.Success : NodeState.Running;
         }
 
         protected override void OnStop() {

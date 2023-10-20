@@ -27,7 +27,7 @@ namespace Examples.ExternalNode
         }
 
         private void Update() {
-            _aiAgent?.Tick((int) (Time.deltaTime * 1000));
+            _aiAgent?.Tick();
         }
         
         private void OnLogReceived(string message, BTLogType logType) {
