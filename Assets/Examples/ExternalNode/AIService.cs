@@ -85,6 +85,7 @@ namespace Examples.ExternalNode
                 }
                 
                 btNode.Guid = node.Guid;
+                btNode.OnInit(btData.Blackboard);
                 btData.TreeNodeData.ReplaceNode(i, btNode);
             }
         }

@@ -13,13 +13,13 @@ namespace BTCore.Runtime
 {
     public abstract class BindValue
     {
-        public Blackboard Blackboard;
+        public Blackboard Blackboard { get; set; }
     }
     
     public class BindValue<T> : BindValue
     {
-        public string BindKeyName;
-        public T RawValue;
+        public string BindKeyName { get; set; }
+        public T RawValue { get; set; }
 
         public T Value {
             get {

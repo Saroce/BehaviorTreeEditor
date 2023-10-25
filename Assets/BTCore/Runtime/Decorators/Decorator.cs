@@ -15,7 +15,7 @@ namespace BTCore.Runtime.Decorators
     {
         protected BTNode Child;
 
-        public string ChildGuid;
+        public string ChildGuid { get; set; }
         
         public void SetChild(BTNode node) {
             Child = node;

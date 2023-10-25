@@ -18,7 +18,7 @@ namespace BTCore.Runtime.Composites
         
         protected List<BTNode> Children = new List<BTNode>();
 
-        public List<string> ChildrenGuids = new List<string>();
+        public List<string> ChildrenGuids { get; set; } = new List<string>();
 
         public void AddChild(BTNode node) {
             if (node == null) {

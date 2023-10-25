@@ -11,7 +11,7 @@ namespace BTCore.Runtime.Decorators
 {
     public class Repeater : Decorator
     {
-        public int RepeatCount = 1; // 设定为负数，一直循环执行
+        public int RepeatCount { get; set; } = 1; // 设定为负数，一直循环执行
         
         private int _counter = 0;
         

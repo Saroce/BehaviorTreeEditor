@@ -11,7 +11,7 @@ namespace BTCore.Runtime.Actions
 {
     public class Log : Action
     {
-        public BindValue<string> Message = new BindValue<string>();
+        public BindValue<string> Message { get; set; } = new BindValue<string>();
 
         protected override void OnStart() {
             

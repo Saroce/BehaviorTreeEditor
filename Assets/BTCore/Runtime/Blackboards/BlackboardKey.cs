@@ -13,7 +13,7 @@ namespace BTCore.Runtime.Blackboards
 {
     public abstract class BlackboardKey
     {
-        public readonly string Name;
+        public string Name { get; }
         public Type Type { get; }
 
         protected BlackboardKey(string name, Type type) {
@@ -30,7 +30,7 @@ namespace BTCore.Runtime.Blackboards
     // blackboardKey.Value = classData;
     public class BlackboardKey<T> : BlackboardKey
     {
-        public T Value;
+        public T Value { get; set; }
         
          public BlackboardKey(string name) : base(name, typeof(T)) {
             

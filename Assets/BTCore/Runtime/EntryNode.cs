@@ -15,7 +15,7 @@ namespace BTCore.Runtime
     {
         private BTNode _child;
 
-        public string ChildGuid;
+        public string ChildGuid { get; set; }
 
         public void SetChild(BTNode node) {
             _child = node;

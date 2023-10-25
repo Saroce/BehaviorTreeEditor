@@ -17,9 +17,9 @@ namespace BTCore.Runtime
 {
     public class BTData
     {
-        public TreeNodeData TreeNodeData = new TreeNodeData();
-        public Blackboard Blackboard = new Blackboard();
-        public BTSettings Settings = new BTSettings();
+        public TreeNodeData TreeNodeData { get; set; } = new TreeNodeData();
+        public Blackboard Blackboard { get; set; } = new Blackboard();
+        public BTSettings Settings { get; set; } = new BTSettings();
         
         [NonSerialized]
         public NodeState TreeState = NodeState.Inactive;

@@ -13,7 +13,7 @@ namespace BTCore.Runtime.Blackboards
 {
     public class Blackboard
     {
-        public List<BlackboardKey> Keys = new List<BlackboardKey>();
+        public List<BlackboardKey> Keys { get; set; } = new List<BlackboardKey>();
 
         public BlackboardKey<T> Find<T>(string keyName) {
             var foundKey = Keys.Find(key => key.Name == keyName);
@@ -36,11 +36,16 @@ namespace BTCore.Runtime.Blackboards
             return blackboardKey != null ? blackboardKey.Value : default;
         }
 
-        public void SetValue<T>(string keyName, T Value) {
-            var blackboardKey = Find<T>(keyName);
-            if (blackboardKey != null) {
-                blackboardKey.Value = Value;
+        public void SetValue<T>(string keyName, T value) {
+            var foundKey = Find<T>(keyName);
+            if (foundKey != null) {
+                foundKey.Value = value;
+                return;
             }
+
+            var blackboardKey = new BlackboardKey<T>(keyName);
+            blackboardKey.Value = value;
+            Keys.Add(blackboardKey);
         }
     }
 }

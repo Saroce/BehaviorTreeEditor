@@ -12,6 +12,6 @@ namespace BTCore.Runtime
     // TODO 缺少编辑器设置面板
     public class BTSettings
     {
-        public bool RestartWhenComplete = false;
+        public bool RestartWhenComplete { get; set; } = false;
     }
 }

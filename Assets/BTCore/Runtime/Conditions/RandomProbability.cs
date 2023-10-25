@@ -13,7 +13,7 @@ namespace BTCore.Runtime.Conditions
 {
     public class RandomProbability : Condition
     {
-        public BindValue<int> Probability = new BindValue<int>();
+        public BindValue<int> Probability { get; set; } = new BindValue<int>();
 
         private Random _random;
         

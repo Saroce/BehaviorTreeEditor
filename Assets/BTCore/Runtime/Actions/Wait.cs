@@ -13,7 +13,7 @@ namespace BTCore.Runtime.Actions
 {
     public class Wait : Action
     {
-        public int Duration = 1000;    // 等待时长(单位ms)
+        public int Duration { get; set; } = 1000;    // 等待时长(单位ms)
         
         private DateTime _startTime;
         
