@@ -8,8 +8,10 @@
 //============================================================
 
 using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace BTCore.Runtime.Unity
 {
@@ -33,7 +35,10 @@ namespace BTCore.Runtime.Unity
             }
             
             try {
+                var stopWatch = Stopwatch.StartNew();
                 BTree = JsonConvert.DeserializeObject<BTree>(_btAsset.text, BTDef.SerializerSettingsAuto);
+                stopWatch.Stop();
+                Debug.Log($"总共耗时：{stopWatch.Elapsed.TotalMilliseconds}毫秒");
                 BTree?.RebuildTree();
             }
             catch (Exception e) {

@@ -33,6 +33,7 @@ namespace BTCore.Runtime.Decorators
 
             if (_counter >= RepeatCount) {
                 State = NodeState.Success;
+                return;
             }
 
             _counter++;
