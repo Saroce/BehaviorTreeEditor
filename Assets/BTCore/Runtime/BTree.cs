@@ -100,6 +100,7 @@ namespace BTCore.Runtime
             }
 
             Clear();
+            
             _parentIndex.Add(-1);
             _relativeChildIndex.Add(-1);
             _parentCompositeIndex.Add(-1);
@@ -111,6 +112,8 @@ namespace BTCore.Runtime
         }
 
         public void Restart() {
+            // 节点状态重置下
+            BTData.Nodes.ForEach(x => x.State = NodeState.Inactive);
             // 未删除的条件评估CompositeIndex为-1
             RemoveChildConditionalReevaluate(-1);
             // 推入根节点索引到运行栈中
@@ -240,14 +243,13 @@ namespace BTCore.Runtime
                                     leftConditionalReevaluate.CompositeIndex = -1;
                                     break;
                                 case AbortType.Self or AbortType.Both:
-                                    leftConditionalReevaluate.Index = _parentCompositeIndex[conditionalReevaluate.Index];
+                                    leftConditionalReevaluate.CompositeIndex = _parentCompositeIndex[conditionalReevaluate.Index];
                                     break;
                             }
                         }
                     }
                 }
                 
-        
                 // 4. 当前的变化的条件节点到其组合节点之间需执行OnConditionAbort
                 var conditionalParentIndex = new List<int>();
                 for (var j = _parentIndex[conditionalReevaluate.Index];
@@ -290,8 +292,8 @@ namespace BTCore.Runtime
             
             stack.Push(index);
             var node = _nodeList[index];
-            node.Start();
             // BTLogger.Debug($"Push Node: {node}");
+            node.Start();
         }
 
         private NodeState PopNode(int index, int stackIndex, NodeState state, bool popChildren = true) {

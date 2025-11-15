@@ -17,7 +17,7 @@ namespace Examples.AbortType
     {
         protected override bool Validate() {
             var haveMP = Blackboard.GetValue<int>("MP");
-            return haveMP > 100;
+            return haveMP >= 100;
         }
     }
 }

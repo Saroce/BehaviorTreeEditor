@@ -40,10 +40,7 @@ namespace BTCore.Runtime.Unity
             
             try {
                 var serializer = SerializerFactory.CreateSerializer(SerializeType);
-                var stopWatch = Stopwatch.StartNew();
                 BTree = serializer.Deserialize<BTree>(_btAsset.bytes);
-                stopWatch.Stop();
-                Debug.Log($"总共耗时：{stopWatch.Elapsed.TotalMilliseconds}毫秒");
                 BTree?.RebuildTree();
             }
             catch (Exception e) {
@@ -52,7 +49,20 @@ namespace BTCore.Runtime.Unity
         }
 
         private void Update() {
-            BTree?.Tick();
+            if (BTree == null) {
+                return;
+            }
+            
+            BTree.Tick();
+
+            // 这是测试BothAbort案例的按键输入，按下Z建直接加蓝200满足ConditionMP条件，按下X建直接抽空蓝量，来模拟ConditionMP条件变化
+            if (Input.GetKeyDown(KeyCode.Z)) {
+                BTree.Blackboard.SetValue("MP", 200);
+            }
+            
+            if (Input.GetKeyDown(KeyCode.X)) {
+                BTree.Blackboard.SetValue("MP", 0);
+            }
         }
         
         private void OnLogReceived(string message, BTLogType logType) {
