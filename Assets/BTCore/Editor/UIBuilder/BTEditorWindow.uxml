@@ -2,28 +2,33 @@
     <Style src="project://database/Assets/BTCore/Editor/UIBuilder/BTEditorWindowStyle.uss?fileID=7433441132597879392&amp;guid=801f0b4a7e51e754f954cea568bcf081&amp;type=3#BTEditorWindowStyle" />
     <uie:Toolbar>
         <uie:ToolbarMenu display-tooltip-when-elided="true" text="Assets" />
+        <uie:ToolbarButton text="New" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewButton" style="-unity-text-align: middle-left;" />
         <uie:ToolbarSpacer style="flex-grow: 1;" />
+        <uie:ToolbarButton text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SettingsButton" style="-unity-text-align: middle-center;" />
     </uie:Toolbar>
     <BTCore.Editor.SplitView fixed-pane-initial-dimension="250" orientation="Horizontal">
         <ui:VisualElement name="left-panel">
             <BTCore.Editor.SplitView orientation="Vertical" fixed-pane-initial-dimension="250">
                 <ui:VisualElement name="inspector-container">
-                    <ui:Label text="Inspector" display-tooltip-when-elided="true" style="background-color: rgb(32, 32, 32);" />
+                    <ui:Label text="Inspector" display-tooltip-when-elided="true" style="background-color: rgb(32, 32, 32); height: 20px; -unity-text-align: middle-left; font-size: 14px;" />
                     <BTCore.Editor.NodeInspectorView style="flex-grow: 1;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="balckboard-container">
-                    <ui:Label text="Blackboard" display-tooltip-when-elided="true" style="background-color: rgb(32, 32, 32);" />
+                    <ui:Label text="Blackboard" display-tooltip-when-elided="true" style="background-color: rgb(32, 32, 32); height: 20px; font-size: 14px; -unity-text-align: middle-left;" />
                     <BTCore.Editor.BlackboardView style="flex-grow: 1;" />
                 </ui:VisualElement>
             </BTCore.Editor.SplitView>
         </ui:VisualElement>
         <ui:VisualElement name="right-panel">
-            <ui:Label text="Tree View" display-tooltip-when-elided="true" style="background-color: rgb(32, 32, 32);" />
+            <ui:Label text="Tree View" display-tooltip-when-elided="true" name="TreeName" style="background-color: rgb(32, 32, 32); height: 20px; -unity-text-align: middle-left; font-size: 14px;" />
             <BTCore.Editor.BTView focusable="true" style="flex-grow: 1;" />
-            <ui:VisualElement style="min-height: 15px; flex-direction: row;">
+            <ui:VisualElement name="VisualElement" style="min-height: 15px; flex-direction: row;">
                 <ui:VisualElement style="min-height: 15px; flex-grow: 1;" />
                 <ui:Button text="↩" display-tooltip-when-elided="true" name="undo-button" style="min-width: auto; margin-right: 5px;" />
                 <ui:Button text="↪" display-tooltip-when-elided="true" name="redo-button" style="min-width: auto; margin-left: 0; margin-right: 4px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="SettingsContainer" style="flex-grow: 0; position: absolute; flex-shrink: 0; width: 280px; height: 100px; margin-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; right: 2px; top: 15px; background-color: rgba(0, 0, 0, 0);">
+                <BTCore.Editor.SettingsView name="SettingsView" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
             </ui:VisualElement>
         </ui:VisualElement>
     </BTCore.Editor.SplitView>

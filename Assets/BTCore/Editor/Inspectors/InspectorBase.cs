@@ -11,6 +11,7 @@ using Sirenix.OdinInspector;
 
 namespace BTCore.Editor.Inspectors
 {
+    [HideMonoScript]
     public abstract class InspectorBase : SerializedScriptableObject
     {
         protected abstract void OnFieldValueChanged();

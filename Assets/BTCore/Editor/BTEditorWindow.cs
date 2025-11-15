@@ -20,18 +20,21 @@ namespace BTCore.Editor
         public static BTEditorWindow Instance;
         private BTView _btView { get; set; }
         
-        private NodeInspectorView _nodeInspectorView;
         private ToolbarMenu _toolbarMenu;
+        private NodeInspectorView _nodeInspectorView;
         private BlackboardView _blackboardView;
-        // TODO 增加设置面板
-        private BTSettings _settings = new BTSettings();
+        private SettingsView _settingsView; 
         
         private Button _undoButton;
         private Button _redoButton;
+        private ToolbarButton _settingsButton;
+        private ToolbarButton _newButton;
 
         private BTree _preBTree;
         private BTUndoRedo _undoRedo;
         private ISerializer _serializer;
+
+        private bool _isShowSettingsView;
         
         public Blackboard Blackboard => _blackboardView.ExportData();
         public BTView BTView => _btView;
@@ -47,7 +50,8 @@ namespace BTCore.Editor
 
         public void CreateGUI() {
             Instance = this;
-
+            _isShowSettingsView = false;
+            
             // Each editor window contains a root VisualElement object
             var root = rootVisualElement;
         
@@ -59,8 +63,11 @@ namespace BTCore.Editor
             _nodeInspectorView = root.Q<NodeInspectorView>();
             _toolbarMenu = root.Q<ToolbarMenu>();
             _blackboardView = root.Q<BlackboardView>();
+            _settingsView = root.Q<SettingsView>();
             _undoButton = root.Q<Button>("undo-button");
             _redoButton = root.Q<Button>("redo-button");
+            _settingsButton = root.Q<ToolbarButton>("SettingsButton");
+            _newButton = root.Q<ToolbarButton>("NewButton");
 
             _undoButton.clicked -= OnUndo;
             _undoButton.clicked += OnUndo;
@@ -69,17 +76,39 @@ namespace BTCore.Editor
             _redoButton.clicked -= OnRedo;
             _redoButton.clicked += OnRedo;
             _redoButton.SetEnabled(false);
+
+            _settingsButton.clicked -= OnSettingsButton;
+            _settingsButton.clicked += OnSettingsButton;
+            
+            _newButton.clicked -= OnNewButton;
+            _newButton.clicked += OnNewButton;
             
             _toolbarMenu.RegisterCallback<MouseEnterEvent>(OnEnterToolbarMenu);
             
             _blackboardView.OnValueListChanged = OnBlackboardValueChanged;
             _btView.OnNodeSelected = OnNodeSelected;
+            _settingsView.OnValueChanged = OnSettingsValueChanged;
             _undoRedo = new BTUndoRedo();
             
             // 打开窗口编辑时，需手动注册下MemoryPackUnion
             MemoryPackDynamicUnionRegister.RegisterDynamicUnion();
             
+            OnSettingsButton();
             OnSelectionChange();
+        }
+
+        private void OnNewButton() {
+            SelectNewTree(new BTree());
+        }
+
+        private void OnSettingsValueChanged() {
+            var settings = _settingsView.ExportData();
+            _serializer = SerializerFactory.CreateSerializer(settings.SerializeType);
+        }
+
+        private void OnSettingsButton() {
+            _isShowSettingsView = !_isShowSettingsView;
+            _settingsView.style.display = _isShowSettingsView ? DisplayStyle.None : DisplayStyle.Flex;
         }
 
         private void OnUndo() {
@@ -157,7 +186,7 @@ namespace BTCore.Editor
                     var btData = new BTree {
                         BTData = _btView.ExportData(),
                         Blackboard = _blackboardView.ExportData(),
-                        Settings = _settings    // TODO 设置编辑器导出数据
+                        Settings = _settingsView.ExportData()
                     };
                     _serializer.SerializeAndSave(btData, path);
                     AssetDatabase.Refresh();
@@ -174,7 +203,8 @@ namespace BTCore.Editor
         }
         
         private (string fileName, string dataExt) GetFileNameAndDataExt() {
-            return _settings.SerializeType switch {
+            var settings = _settingsView.ExportData();
+            return settings.SerializeType switch {
                 SerializeType.Json => (BTDef.DefaultJsonFileName, BTDef.JsonDataExt.TrimStart('.')),
                 SerializeType.MemoryPack => (BTDef.DefaultMemoryPackFileName, BTDef.MemoryPackDataExt.TrimStart('.')),
                 _ => throw new ArgumentOutOfRangeException()
@@ -265,8 +295,9 @@ namespace BTCore.Editor
 
             _btView.ImportData(bTree.BTData);
             _blackboardView.ImportData(bTree.Blackboard);
-            _settings = bTree.Settings;
-            _serializer = SerializerFactory.CreateSerializer(_settings.SerializeType);
+            _settingsView.ImportData(bTree.Settings);
+            
+            _serializer = SerializerFactory.CreateSerializer(bTree.Settings.SerializeType);
         }
     }
 }

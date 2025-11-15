@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8622cad5583d4017bb3b6e17d55fcaa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _btAsset: {fileID: 4900000, guid: 6809d36597d79d842a1d12414e63b356, type: 3}
+  _btAsset: {fileID: 4900000, guid: e3bb92f26210cc94b95ed75b004760f1, type: 3}
   SerializeType: 1
 --- !u!4 &601172402
 Transform:

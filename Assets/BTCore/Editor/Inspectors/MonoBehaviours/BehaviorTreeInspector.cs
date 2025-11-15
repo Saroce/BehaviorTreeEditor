@@ -51,8 +51,10 @@ namespace BTCore.Editor.Inspectors.MonoBehaviours
                 if (_behaviorTree.BTree == null) {
                     _behaviorTree.CreateBTree();
                 }
-                
-                BTEditorWindow.Instance.SelectNewTree(_behaviorTree.BTree);
+
+                if (_behaviorTree.BTree != null) {
+                    BTEditorWindow.Instance.SelectNewTree(_behaviorTree.BTree);   
+                }
             }
             
             EditorGUILayout.EndHorizontal();

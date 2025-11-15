@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a9608d1bd8d48ae915348a6b1c19bad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _btAsset: {fileID: 4900000, guid: 631ae44321ec6374394e2c92c5bf04e4, type: 3}
+  _btAsset: {fileID: 4900000, guid: 62dc08c6306e06b4bb7333920dc01463, type: 3}
   _serializeType: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
