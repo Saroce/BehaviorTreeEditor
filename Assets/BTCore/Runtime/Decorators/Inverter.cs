@@ -8,10 +8,12 @@
 //============================================================
 
 using System;
+using MemoryPack;
 
 namespace BTCore.Runtime.Decorators
 {
-    public class Inverter : Decorator
+    [MemoryPackable]
+    public partial class Inverter : Decorator
     {
         protected override void OnStart() {
             base.OnStart();

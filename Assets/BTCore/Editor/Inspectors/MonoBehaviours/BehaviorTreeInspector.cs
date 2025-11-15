@@ -7,6 +7,7 @@
 //    Modified:  2024-06-29
 //============================================================
 
+using BTCore.Runtime.Serializers;
 using BTCore.Runtime.Unity;
 using UnityEditor;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace BTCore.Editor.Inspectors.MonoBehaviours
     public class BehaviorTreeInspector : UnityEditor.Editor
     {
         private SerializedProperty _btAsset;
+        private SerializedProperty _serializeType;
         private BehaviorTree _behaviorTree;
         
         private void OnEnable() {
@@ -24,14 +26,13 @@ namespace BTCore.Editor.Inspectors.MonoBehaviours
             _behaviorTree = (BehaviorTree) target;
         }
 
+        
         public override void OnInspectorGUI() {
             serializedObject.Update();
             
             EditorGUILayout.BeginHorizontal();
             EditorGUI.BeginChangeCheck();
-            
             EditorGUILayout.PropertyField(_btAsset, new GUIContent("BTAsset"));
-            // 立即更新变化值
             serializedObject.ApplyModifiedProperties();
             // BTAsset有变化时，若BT窗口已经打开需更新显示
             if (EditorGUI.EndChangeCheck()) {
@@ -55,6 +56,7 @@ namespace BTCore.Editor.Inspectors.MonoBehaviours
             }
             
             EditorGUILayout.EndHorizontal();
+            _behaviorTree.SerializeType = (SerializeType) EditorGUILayout.EnumPopup("SerializeType:", _behaviorTree.SerializeType);
         }
     }
 }

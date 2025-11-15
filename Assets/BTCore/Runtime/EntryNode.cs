@@ -8,10 +8,12 @@
 //============================================================
 
 using System;
+using MemoryPack;
 
 namespace BTCore.Runtime
 {
-    public class EntryNode : BTNode
+    [MemoryPackable]
+    public partial class EntryNode : BTNode
     {
         private BTNode _child;
 

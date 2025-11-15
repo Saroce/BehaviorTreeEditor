@@ -9,7 +9,8 @@
 
 using System;
 using System.Diagnostics;
-using Newtonsoft.Json;
+using BTCore.Runtime.Serializers;
+using Examples;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -20,10 +21,13 @@ namespace BTCore.Runtime.Unity
         [SerializeField]
         private TextAsset _btAsset;
         
+        public SerializeType SerializeType = SerializeType.Json;
+        
         public BTree BTree { get; private set; }
 
         private void Start() {
             BTLogger.OnLogReceived += OnLogReceived;
+            MemoryPackDynamicUnionRegister.RegisterDynamicUnion();
             CreateBTree();
             BTree?.Enable();
         }
@@ -35,8 +39,9 @@ namespace BTCore.Runtime.Unity
             }
             
             try {
+                var serializer = SerializerFactory.CreateSerializer(SerializeType);
                 var stopWatch = Stopwatch.StartNew();
-                BTree = JsonConvert.DeserializeObject<BTree>(_btAsset.text, BTDef.SerializerSettingsAuto);
+                BTree = serializer.Deserialize<BTree>(_btAsset.bytes);
                 stopWatch.Stop();
                 Debug.Log($"总共耗时：{stopWatch.Elapsed.TotalMilliseconds}毫秒");
                 BTree?.RebuildTree();
@@ -47,7 +52,7 @@ namespace BTCore.Runtime.Unity
         }
 
         private void Update() {
-            BTree?.Update();
+            BTree?.Tick();
         }
         
         private void OnLogReceived(string message, BTLogType logType) {

@@ -8,15 +8,17 @@
 //============================================================
 
 using BTCore.Runtime.Blackboards;
+using MemoryPack;
 
 namespace BTCore.Runtime
 {
-    public abstract class SharedValue
+    public abstract partial class SharedValue
     {
         protected Blackboard Blackboard { get; set; }
     }
     
-    public class SharedValue<T> : SharedValue
+    [MemoryPackable]
+    public partial class SharedValue<T> : SharedValue
     {
         public string ValueName { get; set; }
         public T RawValue { get; set; }

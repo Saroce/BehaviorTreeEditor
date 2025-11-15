@@ -7,9 +7,12 @@
 //    Modified:  2023-09-29
 //============================================================
 
+using MemoryPack;
+
 namespace BTCore.Runtime.Actions
 {
-    public class Log : Action
+    [MemoryPackable]
+    public partial class Log : Action
     {
         public SharedValue<string> Message { get; set; } = new();
 

@@ -8,10 +8,12 @@
 //============================================================
 
 using BTCore.Runtime.Conditions;
+using MemoryPack;
 
 namespace Examples.AbortType
 {
-    public class ConditionMP : Condition
+    [MemoryPackable]
+    public partial class ConditionMP : Condition
     {
         protected override bool Validate() {
             var haveMP = Blackboard.GetValue<int>("MP");

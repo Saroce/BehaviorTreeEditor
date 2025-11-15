@@ -6,11 +6,15 @@
 //
 //    Modified:  2024-06-27
 //============================================================
+
+using MemoryPack;
+
 #if UNITY_EDITOR
 
 namespace BTCore.Runtime.OtherNodes
 {
-    public class StickNoteNode
+    [MemoryPackable]
+    public partial class StickNoteNode
     {
         public string Title;
         public string Content;

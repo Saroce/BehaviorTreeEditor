@@ -9,10 +9,12 @@
 //============================================================
 
 using System;
+using MemoryPack;
 
 namespace BTCore.Runtime.Composites
 {
-    public class Selector : Composite
+    [MemoryPackable]
+    public partial class Selector : Composite
     {
         protected override void OnStart() {
             base.OnStart();

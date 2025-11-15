@@ -9,11 +9,17 @@
 
 using System;
 using System.Reflection;
+using BTCore.Runtime.Actions;
 using BTCore.Runtime.Blackboards;
+using BTCore.Runtime.Composites;
+using BTCore.Runtime.Conditions;
+using BTCore.Runtime.Decorators;
+using MemoryPack;
 
 namespace BTCore.Runtime
 {
-    public abstract class BTNode : INode
+    [MemoryPackable(GenerateType.NoGenerate)]
+    public abstract partial class BTNode : INode
     {
         public string Name { get; set; }
         public string Guid { get; set; }
@@ -25,7 +31,7 @@ namespace BTCore.Runtime
         
         public NodeState State = NodeState.Inactive;
 
-        protected Blackboard Blackboard;
+        protected Blackboard Blackboard { get; private set;}
 
         public void SetBlackboard(Blackboard blackboard) {
             Blackboard = blackboard;

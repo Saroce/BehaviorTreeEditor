@@ -25,7 +25,7 @@ namespace Examples.ExternalNode
         }
         
         public void Tick() {
-            _btTree?.Update();
+            _btTree?.Tick();
         }
     }
 }

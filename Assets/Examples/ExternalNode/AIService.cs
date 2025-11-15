@@ -13,6 +13,7 @@ using System.Linq;
 using System.Reflection;
 using BTCore.Runtime;
 using BTCore.Runtime.Externals;
+using BTCore.Runtime.Serializers;
 using Newtonsoft.Json;
 
 namespace Examples.ExternalNode
@@ -22,9 +23,10 @@ namespace Examples.ExternalNode
         /// <summary>
         /// Crate AIAgent
         /// </summary>
-        /// <param name="strategy">对应BT资源json配置数据</param>
+        /// <param name="strategy">对应BT资源配置数据</param>
+        /// <param name="serializeType">序列化类型</param>
         /// <returns></returns>
-        IAIAgent CreateAIAgent(string strategy);
+        IAIAgent CreateAIAgent(byte[] strategy, SerializeType serializeType);
     }
     
     public class AIService : IAIService
@@ -51,11 +53,12 @@ namespace Examples.ExternalNode
             return Activator.CreateInstance(_name2ExternalNodeTypes[typeName]) as IExternalNode;
         }
         
-        public IAIAgent CreateAIAgent(string strategy) {
+        public IAIAgent CreateAIAgent(byte[] strategy, SerializeType serializeType) {
             var btTree = (BTree) null;
             try {
                 // 对于含有外部节点配置的BT数据，先替换外部节点，再重建树的连接关系
-                btTree = JsonConvert.DeserializeObject<BTree>(strategy, BTDef.SerializerSettingsAuto);
+                var serializer = SerializerFactory.CreateSerializer(serializeType);
+                btTree = serializer.Deserialize<BTree>(strategy);
                 ReplaceWithExternalNodes(btTree);
             }
             catch (Exception ex) {

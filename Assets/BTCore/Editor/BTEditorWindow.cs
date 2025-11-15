@@ -1,9 +1,13 @@
 using System;
 using System.IO;
+using System.Linq;
 using BTCore.Runtime;
 using BTCore.Runtime.Blackboards;
+using BTCore.Runtime.Serializers;
 using BTCore.Runtime.Unity;
-using Newtonsoft.Json;
+using Examples;
+using MemoryPack;
+using MemoryPack.Formatters;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -19,16 +23,19 @@ namespace BTCore.Editor
         private NodeInspectorView _nodeInspectorView;
         private ToolbarMenu _toolbarMenu;
         private BlackboardView _blackboardView;
-
+        // TODO 增加设置面板
+        private BTSettings _settings = new BTSettings();
+        
         private Button _undoButton;
         private Button _redoButton;
 
+        private BTree _preBTree;
         private BTUndoRedo _undoRedo;
+        private ISerializer _serializer;
         
         public Blackboard Blackboard => _blackboardView.ExportData();
         public BTView BTView => _btView;
-
-        private BTree _preBTree;
+        
         
         [MenuItem("Tools/BehaviorTree/BTEditorWindow")]
         public static void OpenWindow()
@@ -67,8 +74,10 @@ namespace BTCore.Editor
             
             _blackboardView.OnValueListChanged = OnBlackboardValueChanged;
             _btView.OnNodeSelected = OnNodeSelected;
-            
             _undoRedo = new BTUndoRedo();
+            
+            // 打开窗口编辑时，需手动注册下MemoryPackUnion
+            MemoryPackDynamicUnionRegister.RegisterDynamicUnion();
             
             OnSelectionChange();
         }
@@ -107,19 +116,20 @@ namespace BTCore.Editor
 
         private void OnEnterToolbarMenu(MouseEnterEvent evt) {
             _toolbarMenu.menu.MenuItems().Clear();
-            foreach (var filePath in Directory.GetFiles(BTEditorDef.DataDir, "*.json")) {
+            foreach (var filePath in Directory.GetFiles(BTEditorDef.DataDir, "*.*")
+                         .Where(f => f.EndsWith(BTDef.JsonDataExt) || f.EndsWith(BTDef.MemoryPackDataExt))) {
                 var fileName = Path.GetFileName(filePath);
                 _toolbarMenu.menu.AppendAction($"{fileName}", _ => {
-                    var btData = (BTree) null;
+                    var btData = (BTree)null;
                     try {
-                        var json = File.ReadAllText(filePath);
-                        btData = JsonConvert.DeserializeObject<BTree>(json, BTDef.SerializerSettingsAuto);
+                        var serializer = SerializerFactory.CreateSerializer(Path.GetExtension(filePath));
+                        btData = serializer.ReadDataAndDeserialize<BTree>(filePath);
                     }
                     catch (Exception ex) {
                         Debug.LogError($"反序列BT数据失败，path: {filePath} ex: {ex}");
                         return;
                     }
-                    
+
                     SelectNewTree(btData);
                 });
             }
@@ -135,9 +145,10 @@ namespace BTCore.Editor
                     ShowNotification("BT入口不能为空");
                     return;
                 }
-                
-                var path = EditorUtility.SaveFilePanel("另存为", BTEditorDef.DataDir, BTEditorDef.DefaultFileName,
-                    BTEditorDef.DataExt);
+
+                var result = GetFileNameAndDataExt();
+                var path = EditorUtility.SaveFilePanel("另存为", BTEditorDef.DataDir, result.fileName,
+                    result.dataExt);
                 if (string.IsNullOrEmpty(path)) {
                     return;
                 }
@@ -145,10 +156,10 @@ namespace BTCore.Editor
                 try {
                     var btData = new BTree {
                         BTData = _btView.ExportData(),
-                        Blackboard = Blackboard
+                        Blackboard = _blackboardView.ExportData(),
+                        Settings = _settings    // TODO 设置编辑器导出数据
                     };
-                    var json = JsonConvert.SerializeObject(btData, BTDef.SerializerSettingsAll);
-                    File.WriteAllText(path, json);
+                    _serializer.SerializeAndSave(btData, path);
                     AssetDatabase.Refresh();
                 }
                 catch (Exception e) {
@@ -161,7 +172,15 @@ namespace BTCore.Editor
                 Debug.Log($"BT数据保存成功，路径：{path}");
             });
         }
-
+        
+        private (string fileName, string dataExt) GetFileNameAndDataExt() {
+            return _settings.SerializeType switch {
+                SerializeType.Json => (BTDef.DefaultJsonFileName, BTDef.JsonDataExt.TrimStart('.')),
+                SerializeType.MemoryPack => (BTDef.DefaultMemoryPackFileName, BTDef.MemoryPackDataExt.TrimStart('.')),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+        
         private void OnInspectorUpdate() {
             if (EditorApplication.isPlaying) {
                 _btView.UpdateNodesStyle();
@@ -205,14 +224,15 @@ namespace BTCore.Editor
             // 2. 再判断选中的资源可以反序列化为BT数据
             if (btData == null && Selection.activeObject != null) {
                 var path = AssetDatabase.GetAssetPath(Selection.activeObject);
-                if (!path.StartsWith(BTEditorDef.DataDir) || !path.EndsWith(BTEditorDef.DataExt)) {
+                if (!path.StartsWith(BTEditorDef.DataDir) || (!path.EndsWith(BTDef.JsonDataExt) &&
+                    !path.EndsWith(BTDef.MemoryPackDataExt))) {
                     SelectNewTree(new BTree());
                     return;
                 }
-            
+
                 try {
-                    var json = File.ReadAllText(path);
-                    btData = JsonConvert.DeserializeObject<BTree>(json, BTDef.SerializerSettingsAuto);
+                    var serializer = SerializerFactory.CreateSerializer(Path.GetExtension(path));
+                    btData = serializer.ReadDataAndDeserialize<BTree>(path);
                 }
                 catch (Exception e) {
                     ShowNotification("导入BT数据失败");
@@ -245,6 +265,8 @@ namespace BTCore.Editor
 
             _btView.ImportData(bTree.BTData);
             _blackboardView.ImportData(bTree.Blackboard);
+            _settings = bTree.Settings;
+            _serializer = SerializerFactory.CreateSerializer(_settings.SerializeType);
         }
     }
 }

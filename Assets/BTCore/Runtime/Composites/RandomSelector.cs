@@ -9,10 +9,12 @@
 
 using System;
 using System.Collections.Generic;
+using MemoryPack;
 
 namespace BTCore.Runtime.Composites
 {
-    public class RandomSelector : Composite
+    [MemoryPackable]
+    public partial class RandomSelector : Composite
     {
         public int Seed { get; set; }
         public bool UseSeed { get; set; }

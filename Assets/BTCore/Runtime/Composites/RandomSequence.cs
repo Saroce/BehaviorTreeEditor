@@ -10,10 +10,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MemoryPack;
 
 namespace BTCore.Runtime.Composites
 {
-    public class RandomSequence : Composite
+    [MemoryPackable]
+    public partial class RandomSequence : Composite
     {
         public int Seed { get; set; }
         public bool UseSeed { get; set; }

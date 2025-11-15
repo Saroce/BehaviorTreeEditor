@@ -10,14 +10,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using BTCore.Runtime.Conditions;
+using MemoryPack;
 
 namespace BTCore.Runtime.Externals
 {
-    public class ExternalCondition : Condition, IExternalNode
+    [MemoryPackable]
+    public partial class ExternalCondition : Condition, IExternalNode
     {
         public string TypeName { get; set; }
 
-        public Dictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> Properties { get; set; } = new();
         
         protected override void OnStart() {
             base.OnStart();
@@ -36,7 +38,8 @@ namespace BTCore.Runtime.Externals
         }
 
         public override string ToString() {
-            var propertiesDump = Properties.Aggregate("Properties: ", (current, pair) => current + $"key: {pair.Key} value: {pair.Value}");
+            var propertiesDump = Properties.Aggregate("Properties: ",
+                (current, pair) => current + $"key: {pair.Key} value: {pair.Value}");
             return $"External condition typeName: {TypeName} {propertiesDump}";
         }
     }

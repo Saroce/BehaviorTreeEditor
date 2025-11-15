@@ -20,5 +20,13 @@ namespace BTCore.Runtime.Serializers
                 _ => throw new ArgumentOutOfRangeException(nameof(serializeType), serializeType, null)
             };
         }
+        
+        public static ISerializer CreateSerializer(string dataExt) {
+            return dataExt switch {
+                BTDef.JsonDataExt => new JsonSerializer(),
+                BTDef.MemoryPackDataExt => new MemoryPackSerializer(),
+                _ => throw new ArgumentOutOfRangeException($"Unknown dataExt :{dataExt}")
+            };
+        }
     }
 }

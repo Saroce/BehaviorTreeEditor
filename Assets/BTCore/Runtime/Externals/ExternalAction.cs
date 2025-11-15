@@ -10,14 +10,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using BTCore.Runtime.Actions;
+using MemoryPack;
 
 namespace BTCore.Runtime.Externals
 {
-    public class ExternalAction : Action, IExternalNode
+    [MemoryPackable]
+    public partial class ExternalAction : Action, IExternalNode
     {
         public string TypeName { get; set; }
 
-        public Dictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> Properties { get; set; } = new();
         
         protected override void OnStart() {
             base.OnStart();

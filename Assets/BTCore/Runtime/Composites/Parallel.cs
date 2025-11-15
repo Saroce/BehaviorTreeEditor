@@ -10,10 +10,12 @@
 
 using System;
 using System.Collections.Generic;
+using MemoryPack;
 
 namespace BTCore.Runtime.Composites
 {
-    public class Parallel : Composite
+    [MemoryPackable]
+    public partial class Parallel : Composite
     {
         private List<NodeState> _executionState = new();
 

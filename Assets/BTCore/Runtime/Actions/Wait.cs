@@ -8,10 +8,12 @@
 //============================================================
 
 using System;
+using MemoryPack;
 
 namespace BTCore.Runtime.Actions
 {
-    public class Wait : Action
+    [MemoryPackable]
+    public partial class Wait : Action
     {
         public int Duration { get; set; } = 1000;    // 等待时长(单位ms)
         

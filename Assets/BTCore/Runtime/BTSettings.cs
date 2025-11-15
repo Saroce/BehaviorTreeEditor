@@ -8,11 +8,13 @@
 //============================================================
 
 using BTCore.Runtime.Serializers;
+using MemoryPack;
 
 namespace BTCore.Runtime
 {
     // TODO 缺少编辑器设置面板
-    public class BTSettings
+    [MemoryPackable]
+    public partial class BTSettings
     {
         public bool RestartWhenComplete { get; set; } = false;
         

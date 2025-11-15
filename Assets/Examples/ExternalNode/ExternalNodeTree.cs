@@ -8,6 +8,7 @@
 //============================================================
 
 using BTCore.Runtime;
+using BTCore.Runtime.Serializers;
 using UnityEngine;
 
 namespace Examples.ExternalNode
@@ -16,13 +17,16 @@ namespace Examples.ExternalNode
     {
         [SerializeField]
         private TextAsset _btAsset;
-    
+
+        [SerializeField] private SerializeType _serializeType;
+        
         private IAIAgent _aiAgent;
         private readonly IAIService _aiService = new AIService();
     
         private void Start() {
             BTLogger.OnLogReceived += OnLogReceived;
-            _aiAgent = _aiService.CreateAIAgent(_btAsset.text);
+            MemoryPackDynamicUnionRegister.RegisterDynamicUnion();
+            _aiAgent = _aiService.CreateAIAgent(_btAsset.bytes, _serializeType);
         }
 
         private void Update() {

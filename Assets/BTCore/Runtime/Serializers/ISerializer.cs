@@ -11,8 +11,12 @@ namespace BTCore.Runtime.Serializers
 {
     public interface ISerializer
     {
-        byte[] Serialize(object obj);
+        byte[] Serialize<T>(T obj);
 
         T Deserialize<T>(byte[] bytes);
+
+        void SerializeAndSave<T>(T obj, string path);
+
+        T ReadDataAndDeserialize<T>(string path);
     }
 }

@@ -7,9 +7,12 @@
 //    Modified:  2023-10-01
 //============================================================
 
+using MemoryPack;
+
 namespace BTCore.Runtime.Decorators
 {
-    public class Repeater : Decorator
+    [MemoryPackable]
+    public partial class Repeater : Decorator
     {
         public int RepeatCount { get; set; } = 1; // 设定为负数，一直循环执行
         

@@ -8,11 +8,13 @@
 //============================================================
 
 using BTCore.Runtime.Conditions;
+using MemoryPack;
 using UnityEngine;
 
 namespace BTCore.Runtime.Unity.Conditions
 {
-    public class IsKeyDown : Condition
+    [MemoryPackable]
+    public partial class IsKeyDown : Condition
     {
         public KeyCode KeyCode = KeyCode.None;
         

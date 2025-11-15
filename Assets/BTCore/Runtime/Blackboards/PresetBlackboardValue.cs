@@ -7,27 +7,33 @@
 //    Modified:  2023-10-10
 //============================================================
 
+using MemoryPack;
+
 namespace BTCore.Runtime.Blackboards
 {
-    public class IntValue : BlackboardValue<int>
+    [MemoryPackable]
+    public partial class IntValue : BlackboardValue<int>
     {
         public IntValue(string name) : base(name) {
         }
     }
 
-    public class FloatValue : BlackboardValue<float>
+    [MemoryPackable]
+    public partial class FloatValue : BlackboardValue<float>
     {
         public FloatValue(string name) : base(name) {
         }
     }
 
-    public class DoubleValue : BlackboardValue<double>
+    [MemoryPackable]
+    public partial class DoubleValue : BlackboardValue<double>
     {
         public DoubleValue(string name) : base(name) {
         }
     }
 
-    public class StringValue : BlackboardValue<string>
+    [MemoryPackable]
+    public partial class StringValue : BlackboardValue<string>
     {
         public StringValue(string name) : base(name) {
         }

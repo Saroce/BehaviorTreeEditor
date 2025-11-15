@@ -7,11 +7,13 @@
 //    Modified:  2023-10-01
 //============================================================
 
+using MemoryPack;
+
 namespace BTCore.Runtime.Decorators
 {
-    public class Success : Decorator
+    [MemoryPackable]
+    public partial class Success : Decorator
     {
-        
         protected override void OnStop() {
         }
 

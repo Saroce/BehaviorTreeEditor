@@ -9,11 +9,13 @@
 
 using BTCore.Runtime;
 using BTCore.Runtime.Actions;
+using MemoryPack;
 using UnityEngine;
 
 namespace Examples.AbortType
 {
-    public class ActionSkill : Action
+    [MemoryPackable]
+    public partial class ActionSkill : Action
     {
         private float _startTime;
         private float _duration = 2000;

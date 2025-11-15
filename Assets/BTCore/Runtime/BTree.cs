@@ -13,10 +13,12 @@ using BTCore.Runtime.Blackboards;
 using BTCore.Runtime.Composites;
 using BTCore.Runtime.Conditions;
 using BTCore.Runtime.Decorators;
+using MemoryPack;
 
 namespace BTCore.Runtime
 {
-    public class BTree
+    [MemoryPackable]
+    public partial class BTree
     {
         public BTData BTData { get; set; } = new();
         public Blackboard Blackboard { get; set; } = new();
@@ -37,11 +39,31 @@ namespace BTCore.Runtime
         private readonly List<Stack<int>> _runStack = new(); // 节点运行栈
         
         private int _preIndex;
-        private NodeState _preState; 
+        private NodeState _preState;
+
+        private void Clear() {
+            _runStack.Clear();
+            _nodeList.Clear();
+            _parentIndex.Clear();
+            _childrenIndex.Clear();
+            _relativeChildIndex.Clear();
+            _parentCompositeIndex.Clear();
+            _childConditionalIndex.Clear();
+            _conditionalReevaluates.Clear();
+            _index2ConditionalReevaluate.Clear();
+        }
         
-        // TODO 其他序列化可能不会触发回调
         [OnDeserialized]
-        private void OnAfterDeserialize(StreamingContext context) {
+        private void OnAfterJsonDeserialize(StreamingContext context) {
+            OnDataDeserialized();
+        }
+        
+        [MemoryPackOnDeserialized]
+        private void OnAfterMemoryPackDeserialize() {
+            OnDataDeserialized();
+        }
+        
+        private void OnDataDeserialized() {
             BTData.Nodes.ForEach(node => {
                 node.SetBlackboard(Blackboard);
             });
@@ -76,7 +98,8 @@ namespace BTCore.Runtime
                 BTLogger.Error("Entry node is null!");
                 return;
             }
-            
+
+            Clear();
             _parentIndex.Add(-1);
             _relativeChildIndex.Add(-1);
             _parentCompositeIndex.Add(-1);
@@ -132,7 +155,10 @@ namespace BTCore.Runtime
             }
         }
         
-        public void Update() {
+        /// <summary>
+        /// 逻辑帧调用
+        /// </summary>
+        public void Tick() {
             ReevaluateConditionalNode();
 
             for (var i  = _runStack.Count - 1; i >= 0; i--) {

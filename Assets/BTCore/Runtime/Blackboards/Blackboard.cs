@@ -8,10 +8,12 @@
 //============================================================
 
 using System.Collections.Generic;
+using MemoryPack;
 
 namespace BTCore.Runtime.Blackboards
 {
-    public class Blackboard
+    [MemoryPackable]
+    public partial class Blackboard
     {
         public List<BlackboardValue> Values { get; set; } = new();
 

@@ -234,7 +234,7 @@ namespace BTCore.Editor
                 Y = colorGroup.GetPosition().y,
                 Width = colorGroup.GetPosition().width,
                 Height = colorGroup.GetPosition().height,
-                GroupColor = new GroupColor(color)
+                GroupColor = new GroupColor(color.r, color.g, color.b, color.a)
             };
             
             // 查询当前组包含那些节点

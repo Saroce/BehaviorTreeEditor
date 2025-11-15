@@ -8,10 +8,19 @@
 //============================================================
 
 using System;
+using MemoryPack;
 
 namespace BTCore.Runtime.Blackboards
 {
-    public abstract class BlackboardValue
+    /// <summary>
+    /// 若有扩展非预设类型黑板变量，可参考BTNode手动进行注册
+    /// </summary>
+    [MemoryPackable]
+    [MemoryPackUnion(0, typeof(IntValue))]
+    [MemoryPackUnion(1, typeof(FloatValue))]
+    [MemoryPackUnion(2, typeof(DoubleValue))]
+    [MemoryPackUnion(3, typeof(StringValue))]
+    public abstract partial class BlackboardValue
     {
         /// <summary>
         /// 对应黑板变量的名称(唯一)
@@ -32,7 +41,8 @@ namespace BTCore.Runtime.Blackboards
         }
     }
     
-    public class BlackboardValue<T> : BlackboardValue
+    [MemoryPackable]
+    public partial class BlackboardValue<T> : BlackboardValue
     {
         public T Value { get; set; }
         

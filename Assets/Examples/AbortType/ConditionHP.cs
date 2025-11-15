@@ -8,10 +8,12 @@
 //============================================================
 
 using BTCore.Runtime.Conditions;
+using MemoryPack;
 
 namespace Examples.AbortType
 {
-    public class ConditionHP : Condition
+    [MemoryPackable]
+    public partial class ConditionHP : Condition
     {
         protected override bool Validate() {
             var haveHP = Blackboard.GetValue<int>("HP");

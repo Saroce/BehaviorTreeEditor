@@ -8,10 +8,12 @@
 //============================================================
 
 using System;
+using MemoryPack;
 
 namespace BTCore.Runtime.Conditions
 {
-    public class RandomProbability : Condition
+    [MemoryPackable]
+    public partial class RandomProbability : Condition
     {
         public SharedValue<int> Probability { get; set; } = new();
 

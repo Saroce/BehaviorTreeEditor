@@ -8,11 +8,13 @@
 //============================================================
 #if UNITY_EDITOR
 using System.Collections.Generic;
+using MemoryPack;
 using UnityEngine;
 
 namespace BTCore.Runtime.OtherNodes
 {
-    public class GroupNode
+    [MemoryPackable]
+    public partial class GroupNode
     {
         public string Title;
         public float X;
@@ -20,21 +22,22 @@ namespace BTCore.Runtime.OtherNodes
         public float Width;
         public float Height;
         public GroupColor GroupColor;
-        public readonly List<string> NodeGuids = new();
+        public List<string> NodeGuids = new();
     }
 
-    public class GroupColor
+    [MemoryPackable]
+    public partial class GroupColor
     {
         public float R;
         public float G;
         public float B;
         public float A;
-
-        public GroupColor(Color color) {
-            R = color.r;
-            G = color.g;
-            B = color.b;
-            A = color.a;
+        
+        public GroupColor(float r, float g, float b, float a) {
+            R = r;
+            G = g;
+            B = b;
+            A = a;
         }
         
         public static implicit operator Color(GroupColor groupColor) {
